@@ -1,0 +1,20 @@
+{
+  "name": "techword",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/core",
+    "packages/vscode",
+    "packages/browser"
+  ],
+  "scripts": {
+    "build": "npm run build -w @techword/core && npm run build -w techword-vscode && npm run build -w @techword/browser",
+    "watch:core": "npm run watch -w @techword/core",
+    "test": "npm test -w @techword/core"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  }
+}

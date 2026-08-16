@@ -1,0 +1,193 @@
+[
+  {
+    "id": "closure",
+    "term": "closure",
+    "match": ["クロージャ", "クロージャー"],
+    "short": "自分が作られた場所の変数を覚えている関数。",
+    "detail": "関数が定義されたスコープの変数を、外に持ち出された後も参照し続ける仕組み。カウンタや設定値を外から触れない形で持たせるのに使う。",
+    "example": "const counter = (() => { let n = 0; return () => ++n; })();",
+    "link": "https://developer.mozilla.org/ja/docs/Web/JavaScript/Closures"
+  },
+  {
+    "id": "idempotent",
+    "term": "idempotent",
+    "match": ["冪等", "べき等", "idempotency"],
+    "short": "何回実行しても結果が同じになる性質。",
+    "detail": "リトライしても壊れないので、通信が不安定な API やデプロイ処理で重要になる。DELETE は冪等、POST は普通は冪等でない。"
+  },
+  {
+    "id": "race-condition",
+    "term": "race condition",
+    "match": ["競合状態", "レースコンディション"],
+    "short": "処理の実行順序次第で結果が変わってしまうバグ。",
+    "detail": "複数の処理が同じデータを同時に読み書きすると起きる。再現しにくく、ログには残りにくいのが厄介なところ。"
+  },
+  {
+    "id": "memoization",
+    "term": "memoization",
+    "match": ["メモ化", "memoize", "memo"],
+    "short": "一度計算した結果を覚えておいて使い回すこと。",
+    "detail": "同じ入力なら同じ出力になる関数にだけ使える。速くなる代わりにメモリを食うので、重い計算に限定する。"
+  },
+  {
+    "id": "gc",
+    "term": "garbage collection",
+    "match": ["GC", "ガベージコレクション", "ガベコレ"],
+    "short": "使われなくなったメモリを自動で回収する仕組み。",
+    "detail": "どこからも参照されなくなったオブジェクトを処理系が見つけて解放する。回収中に一瞬止まることがあり、これを stop-the-world と呼ぶ。"
+  },
+  {
+    "id": "immutable",
+    "term": "immutable",
+    "match": ["イミュータブル", "不変", "immutability"],
+    "short": "作った後に中身を書き換えられないデータ。",
+    "detail": "変更するときは新しい値を作り直す。誰かに勝手に書き換えられる心配がないので、差分検知や並行処理が楽になる。"
+  },
+  {
+    "id": "dependency-injection",
+    "term": "dependency injection",
+    "match": ["DI", "依存性注入"],
+    "short": "使う部品を自分で作らず、外から渡してもらう設計。",
+    "detail": "テスト時に本物のDBの代わりに偽物を渡す、といった差し替えができる。渡す側が増えるぶん初期の見通しは悪くなる。"
+  },
+  {
+    "id": "middleware",
+    "term": "middleware",
+    "match": ["ミドルウェア"],
+    "short": "リクエストと本処理の間に挟まる共通処理。",
+    "detail": "認証・ログ・エラー処理など、どのエンドポイントでも必要な処理をまとめて差し込む層。順番に通過していく。"
+  },
+  {
+    "id": "polyfill",
+    "term": "polyfill",
+    "match": ["ポリフィル"],
+    "short": "古い環境に新しい機能を後付けするコード。",
+    "detail": "ブラウザが未対応の API を、既存の機能だけで同じ動きに再現する。対応済みの環境では読み込まれないようにするのが普通。"
+  },
+  {
+    "id": "hoisting",
+    "term": "hoisting",
+    "match": ["巻き上げ", "ホイスティング"],
+    "short": "宣言がスコープの先頭に持ち上げられる挙動。",
+    "detail": "var と関数宣言は定義前に参照できてしまう。let / const も巻き上げられるが、宣言前のアクセスはエラーになる（TDZ）。",
+    "langs": ["javascript", "typescript", "javascriptreact", "typescriptreact"]
+  },
+  {
+    "id": "use-state",
+    "term": "useState",
+    "match": ["ユーズステート"],
+    "short": "React で「変わる値」を持つためのフック。",
+    "detail": "現在の値と更新関数のペアを返す。更新関数を呼ぶとそのコンポーネントが再描画される。",
+    "example": "const [count, setCount] = useState(0);",
+    "link": "https://ja.react.dev/reference/react/useState",
+    "langs": ["javascript", "typescript", "javascriptreact", "typescriptreact"]
+  },
+  {
+    "id": "use-effect",
+    "term": "useEffect",
+    "short": "React で描画のあとに副作用を走らせるフック。",
+    "detail": "通信・購読・DOM 操作など、描画そのものではない処理を置く。第 2 引数の依存配列に入れた値が変わったときだけ再実行される。",
+    "link": "https://ja.react.dev/reference/react/useEffect",
+    "langs": ["javascript", "typescript", "javascriptreact", "typescriptreact"]
+  },
+  {
+    "id": "promise",
+    "term": "Promise",
+    "match": ["プロミス"],
+    "short": "「あとで結果が入る箱」を表すオブジェクト。",
+    "detail": "pending → fulfilled / rejected と一度だけ状態が変わる。await で中身を取り出すか、.then / .catch でつなぐ。",
+    "langs": ["javascript", "typescript", "javascriptreact", "typescriptreact"]
+  },
+  {
+    "id": "generic",
+    "term": "generics",
+    "match": ["ジェネリクス", "generic", "型引数"],
+    "short": "型を後から差し込めるようにする仕組み。",
+    "detail": "Array<T> の T のように、使う側が型を決める。any と違って中身の型が最後まで追跡される。"
+  },
+  {
+    "id": "type-guard",
+    "term": "type guard",
+    "match": ["型ガード"],
+    "short": "実行時のチェックで型を絞り込む書き方。",
+    "detail": "typeof や in、`x is Foo` を返す関数を使うと、その分岐の中でコンパイラが型を狭めてくれる。",
+    "langs": ["typescript", "typescriptreact"]
+  },
+  {
+    "id": "orm",
+    "term": "ORM",
+    "match": ["オーアールエム", "object relational mapping"],
+    "short": "DB のテーブルをコードのオブジェクトとして扱う道具。",
+    "detail": "SQL を直接書かずにデータを読み書きできる。手軽な代わりに、生成される SQL が重くなりがちなので要注意。"
+  },
+  {
+    "id": "n-plus-one",
+    "term": "N+1 problem",
+    "match": ["N+1", "エヌプラスワン"],
+    "short": "一覧を出すたびに件数ぶん追加クエリが飛ぶ性能問題。",
+    "detail": "一覧 1 回 + 各行 1 回ずつで N+1 回。ORM で気づかずにやりがち。JOIN や一括ロードでまとめて解決する。"
+  },
+  {
+    "id": "idempotency-key",
+    "term": "idempotency key",
+    "match": ["冪等キー"],
+    "short": "同じリクエストの二重実行を防ぐための識別子。",
+    "detail": "決済などで、通信エラー後の再送が二重課金にならないようにする。サーバ側は同じキーを見たら前回の結果をそのまま返す。"
+  },
+  {
+    "id": "cors",
+    "term": "CORS",
+    "match": ["オリジン間リソース共有", "cross origin resource sharing"],
+    "short": "別ドメインへのブラウザからの通信を許可する仕組み。",
+    "detail": "サーバが Access-Control-Allow-Origin などのヘッダで明示的に許可する。ブラウザ側だけでは回避できない。"
+  },
+  {
+    "id": "jwt",
+    "term": "JWT",
+    "match": ["json web token", "ジョット"],
+    "short": "署名つきで中身を自分で検証できるトークン。",
+    "detail": "ヘッダ・ペイロード・署名の 3 つを . でつないだ文字列。暗号化ではないので、ペイロードは誰でも読める点に注意。"
+  },
+  {
+    "id": "migration",
+    "term": "migration",
+    "match": ["マイグレーション", "マイグレ"],
+    "short": "DB のスキーマ変更を手順として記録したファイル。",
+    "detail": "適用順に番号が振られ、どこまで適用済みかを DB 側が覚えている。本番では戻せない変更が多いので、前進のみで設計するのが安全。"
+  },
+  {
+    "id": "debounce",
+    "term": "debounce",
+    "match": ["デバウンス"],
+    "short": "連続した呼び出しを、止まってから 1 回にまとめる。",
+    "detail": "入力欄のインクリメンタル検索でよく使う。一定間隔ごとに 1 回にする throttle とは別物。"
+  },
+  {
+    "id": "throttle",
+    "term": "throttle",
+    "match": ["スロットル", "スロットリング", "throttling"],
+    "short": "呼び出しの頻度を一定間隔までに制限する。",
+    "detail": "スクロールやリサイズのように、鳴り続けるイベントを間引くのに使う。最後の 1 回だけにしたいなら debounce。"
+  },
+  {
+    "id": "exponential-backoff",
+    "term": "exponential backoff",
+    "match": ["指数バックオフ", "backoff"],
+    "short": "リトライ間隔を 1秒, 2秒, 4秒…と伸ばしていく方式。",
+    "detail": "落ちているサーバに一斉に再接続して追い打ちをかけるのを防ぐ。実際にはランダムな揺らぎ（jitter）も足す。"
+  },
+  {
+    "id": "single-source-of-truth",
+    "term": "single source of truth",
+    "match": ["SSOT", "信頼できる唯一の情報源"],
+    "short": "同じ情報の正本を 1 箇所だけに持つ設計方針。",
+    "detail": "同じ値をあちこちにコピーすると必ずズレる。コピーではなく参照させるか、1 箇所から自動生成する。"
+  },
+  {
+    "id": "feature-flag",
+    "term": "feature flag",
+    "match": ["フィーチャーフラグ", "feature toggle", "機能フラグ"],
+    "short": "コードを出したまま機能のオン/オフを切り替える仕組み。",
+    "detail": "デプロイと公開を分離できる。消し忘れたフラグが分岐として残り続けるので、寿命を決めて運用する。"
+  }
+]

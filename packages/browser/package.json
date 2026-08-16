@@ -1,0 +1,12 @@
+{
+  "name": "@techword/browser",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/content.ts --bundle --outfile=dist/content.js --format=iife --target=chrome110 && cp manifest.json dist/manifest.json",
+    "watch": "esbuild src/content.ts --bundle --outfile=dist/content.js --format=iife --target=chrome110 --watch"
+  },
+  "dependencies": {
+    "@techword/core": "*"
+  }
+}

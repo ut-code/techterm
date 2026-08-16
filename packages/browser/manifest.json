@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "TechWord",
+  "version": "0.1.0",
+  "description": "プログラミング用語にホバーすると、意味を簡潔に表示します。",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

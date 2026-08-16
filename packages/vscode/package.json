@@ -1,0 +1,61 @@
+{
+  "name": "techword-vscode",
+  "displayName": "TechWord",
+  "description": "プログラミング用語にホバーすると、意味を簡潔に表示します。",
+  "version": "0.1.0",
+  "private": true,
+  "publisher": "techword",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "TechWord",
+      "properties": {
+        "techword.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "ホバーでの用語解説を有効にします。"
+        },
+        "techword.languages": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["*"],
+          "description": "解説を表示する languageId。\"*\" ですべての言語。"
+        },
+        "techword.userTerms": {
+          "type": "array",
+          "default": [],
+          "description": "同梱辞書に追加・上書きする用語。同じ id があればユーザー側が勝ちます。",
+          "items": {
+            "type": "object",
+            "required": ["id", "term", "short"],
+            "properties": {
+              "id": { "type": "string" },
+              "term": { "type": "string" },
+              "match": { "type": "array", "items": { "type": "string" } },
+              "short": { "type": "string" },
+              "detail": { "type": "string" },
+              "example": { "type": "string" },
+              "link": { "type": "string" },
+              "langs": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json --watch"
+  },
+  "dependencies": {
+    "@techword/core": "*"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0"
+  }
+}

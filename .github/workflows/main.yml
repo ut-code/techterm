@@ -1,0 +1,30 @@
+name: Run tests
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest #通常はubuntu-latestにすることが多い、ubuntuはLinuxを用いたOSの一つで、ci/cd時にもよく使われる
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4 #v3だと古い
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7 #v4は2024年ごろの主流
+        with:
+        node-version: '24'
+
+      - name: create ci environment
+        run: npm ci
+
+      - name: build package
+        run: npm run build
+
+      - name: run tests
+        run: npm test

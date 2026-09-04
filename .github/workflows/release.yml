@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - main
-    paths:
-        - packages/browser/manifest.json
+  paths:
+      - packages/browser/manifest.json
 
 jobs:
   release:
@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: checkout repository
-        uses: actions/checkout@v7 #v3だと古い
+        uses: actions/checkout@v4 #v3だと古い
 
       - name: Use Node.js
         uses: actions/setup-node@v7 #v4は2024年ごろの主流
@@ -34,10 +34,9 @@ jobs:
 
       - name: Submit
         run: |
-          npx chrome-webstore-upload-cli@4 --source extension.zip
+          npx chrome-webstore-upload-cli@4 upload --source extension.zip --auto-publish
         env:
           EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-          PUBLISHER_ID: ${{ secrets.PUBLISHER_ID }}

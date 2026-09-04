@@ -1,7 +1,7 @@
 {
-  "name": "techword",
+  "name": "TechTerm",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "workspaces": [
     "packages/core",
     "packages/vscode",
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.20.1",
+    "archiver": "^8.0.0",
     "esbuild": "^0.24.0",
     "typescript": "^5.6.0"
   }

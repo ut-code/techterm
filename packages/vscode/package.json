@@ -2,7 +2,7 @@
   "name": "techword-vscode",
   "displayName": "TechWord",
   "description": "プログラミング用語にホバーすると、意味を簡潔に表示します。",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "publisher": "techword",
   "engines": {

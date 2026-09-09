@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TechTerm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "プログラミング用語にホバーすると、意味を簡潔に表示します。",
   "content_scripts": [
     {

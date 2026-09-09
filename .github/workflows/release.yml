@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-        - packages/browser/manifest.json
+      - packages/browser/manifest.json
 
 jobs:
   release:
@@ -41,3 +41,4 @@ jobs:
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           PUBLISHER_ID: ${{ secrets.PUBLISHER_ID }}
+          

@@ -39,6 +39,10 @@ npm run build -w @techword/browser
 `chrome://extensions` → デベロッパーモード ON → 「パッケージ化されていない拡張機能を読み込む」
 で `packages/browser/dist` を選択。任意のページで用語にホバーします。
 
+ホバー内の `☆` を押すと用語をお気に入りに追加でき、もう一度押すと解除できます。
+Chrome のツールバーにある TechTerm のアイコンを押すとサイドパネルが開き、
+お気に入りの確認、個別削除、全削除ができます。お気に入りは Chrome の同期ストレージに保存されます。
+
 ## 辞書を増やす
 
 `packages/core/src/data/terms.json` に追記します。

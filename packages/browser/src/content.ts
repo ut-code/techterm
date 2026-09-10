@@ -1,4 +1,5 @@
 import { Dictionary, builtinTerms, type Match } from '@techword/core';
+import { getFavoriteIds, toggleFavorite, watchFavoriteIds } from './favorites';
 
 const dictionary = new Dictionary(builtinTerms);
 
@@ -8,13 +9,38 @@ const HOVER_DELAY_MS = 250;
 const tooltip = createTooltip();
 let hoverTimer: number | undefined;
 let currentId: string | undefined;
+let currentFavoriteButton: HTMLButtonElement | undefined;
+let favoriteIds = new Set<string>();
+let pointerInsideTooltip = false;
+
+void getFavoriteIds()
+  .then((ids) => {
+    favoriteIds = new Set(ids);
+    refreshCurrentFavoriteButton();
+  })
+  .catch((error: unknown) => console.error('TechTerm: お気に入りを読み込めませんでした。', error));
+
+watchFavoriteIds((ids) => {
+  favoriteIds = new Set(ids);
+  refreshCurrentFavoriteButton();
+});
 
 document.addEventListener('mousemove', (event) => {
   window.clearTimeout(hoverTimer);
+  if (event.composedPath().includes(tooltip.host) || pointerInsideTooltip) return;
   hoverTimer = window.setTimeout(() => handleHover(event), HOVER_DELAY_MS);
 });
 document.addEventListener('scroll', hide, { passive: true, capture: true });
 window.addEventListener('blur', hide);
+
+tooltip.host.addEventListener('pointerenter', () => {
+  pointerInsideTooltip = true;
+  window.clearTimeout(hoverTimer);
+});
+tooltip.host.addEventListener('pointerleave', () => {
+  pointerInsideTooltip = false;
+  hide();
+});
 
 function handleHover(event: MouseEvent): void {
   const caret = caretFromPoint(event.clientX, event.clientY);
@@ -33,6 +59,8 @@ function handleHover(event: MouseEvent): void {
 
 function hide(): void {
   currentId = undefined;
+  currentFavoriteButton = undefined;
+  pointerInsideTooltip = false;
   tooltip.host.style.display = 'none';
 }
 
@@ -57,10 +85,37 @@ function render({ entry }: Match): void {
   const { panel } = tooltip;
   panel.replaceChildren();
 
+  const header = document.createElement('div');
+  header.className = 'tw-header';
+
   const head = document.createElement('div');
   head.className = 'tw-head';
   head.textContent = entry.term;
-  panel.append(head);
+
+  const favoriteButton = document.createElement('button');
+  favoriteButton.type = 'button';
+  favoriteButton.className = 'tw-favorite';
+  updateFavoriteButton(favoriteButton, entry.id);
+  favoriteButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    favoriteButton.disabled = true;
+
+    try {
+      const isFavorite = await toggleFavorite(entry.id);
+      if (isFavorite) favoriteIds.add(entry.id);
+      else favoriteIds.delete(entry.id);
+      updateFavoriteButton(favoriteButton, entry.id);
+    } catch (error: unknown) {
+      console.error('TechTerm: お気に入りを更新できませんでした。', error);
+    } finally {
+      favoriteButton.disabled = false;
+    }
+  });
+  currentFavoriteButton = favoriteButton;
+
+  header.append(head, favoriteButton);
+  panel.append(header);
 
   const short = document.createElement('div');
   short.className = 'tw-short';
@@ -104,7 +159,16 @@ function createTooltip(): { host: HTMLElement; panel: HTMLElement } {
       box-shadow: 0 6px 20px rgba(0,0,0,.35);
       font: 13px/1.6 -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
     }
-    .tw-head { font-weight: 700; margin-bottom: 2px; }
+    .tw-header { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+    .tw-head { flex: 1; min-width: 0; font-weight: 700; }
+    .tw-favorite {
+      display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0;
+      border: 1px solid #596276; border-radius: 7px; background: #2b3241; color: #ffd166;
+      cursor: pointer; font: 20px/1 sans-serif;
+    }
+    .tw-favorite:hover { background: #394256; }
+    .tw-favorite:focus-visible { outline: 2px solid #7fb2ff; outline-offset: 2px; }
+    .tw-favorite:disabled { cursor: wait; opacity: .65; }
     .tw-short { color: #f2f2f2; }
     .tw-detail { margin-top: 6px; color: #b9c0cf; }
     .tw-example {
@@ -120,6 +184,21 @@ function createTooltip(): { host: HTMLElement; panel: HTMLElement } {
   document.documentElement.append(host);
 
   return { host, panel };
+}
+
+function updateFavoriteButton(button: HTMLButtonElement, id: string): void {
+  const isFavorite = favoriteIds.has(id);
+  const label = isFavorite ? 'お気に入りから削除' : 'お気に入りに追加';
+  button.textContent = isFavorite ? '★' : '☆';
+  button.setAttribute('aria-pressed', String(isFavorite));
+  button.setAttribute('aria-label', label);
+  button.title = label;
+}
+
+function refreshCurrentFavoriteButton(): void {
+  if (currentId && currentFavoriteButton) {
+    updateFavoriteButton(currentFavoriteButton, currentId);
+  }
 }
 
 /** Chrome (caretRangeFromPoint) と Firefox (caretPositionFromPoint) の差を吸収する。 */

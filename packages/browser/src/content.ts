@@ -17,6 +17,7 @@ document.addEventListener('scroll', hide, { passive: true, capture: true });
 window.addEventListener('blur', hide);
 
 function handleHover(event: MouseEvent): void {
+  if (tooltip.host.style.display === 'block' && tooltip.host.matches(':hover')) return; // ツールチップ上にマウスがあるときはツールチップを消さないようにする
   const caret = caretFromPoint(event.clientX, event.clientY);
   if (!caret || caret.node.nodeType !== Node.TEXT_NODE) return hide();
 

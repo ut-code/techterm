@@ -2,6 +2,16 @@ import { Dictionary, builtinTerms, type Match } from '@techword/core';
 
 const dictionary = new Dictionary(builtinTerms);
 
+installHighlightStyle();
+highlight();
+const observer = new MutationObserver(highlight);
+const config = { 
+  childList: true, // 子要素の追加・削除を監視
+  subtree: true,    // 子孫要素（さらに下の階層）まで含めて監視する場合に true
+  characterData: true, // テキストノードの変更を監視
+};
+observer.observe(document.body, config);
+
 /** ホバーしてから出すまでの待ち時間。すぐ出すとポインタを動かすたびに点滅する。 */
 const HOVER_DELAY_MS = 250;
 
@@ -17,6 +27,7 @@ document.addEventListener('scroll', hide, { passive: true, capture: true });
 window.addEventListener('blur', hide);
 
 function handleHover(event: MouseEvent): void {
+  if (tooltip.host.style.display === 'block' && tooltip.host.matches(':hover')) return; // ツールチップ上にマウスがあるときはツールチップを消さないようにする
   const caret = caretFromPoint(event.clientX, event.clientY);
   if (!caret || caret.node.nodeType !== Node.TEXT_NODE) return hide();
 
@@ -139,4 +150,35 @@ function caretFromPoint(x: number, y: number): { node: Node; offset: number } | 
   if (pos) return { node: pos.offsetNode, offset: pos.offset };
 
   return undefined;
+}
+
+function highlight(): void {
+  let ranges: Range[] = [];
+  const walker = document.createTreeWalker(
+    document.body, // body以下のノードを走査する
+    NodeFilter.SHOW_TEXT, //テキストノードのみを対象
+  );
+
+  while (walker.nextNode() !== null) {
+    const nodeTagName = walker.currentNode.parentElement?.tagName;
+    if (nodeTagName === 'SCRIPT' || nodeTagName === 'STYLE') continue; //　負荷軽減のためにスクリプトとスタイルの中身は無視する
+    const textNodes = dictionary.findAll(walker.currentNode.textContent ?? '');
+    for (const {start, end} of textNodes) {
+      const range = new Range();
+      range.setStart(walker.currentNode, start);
+      range.setEnd(walker.currentNode, end);
+      ranges.push(range);
+    }
+  }
+  const highlightRange = new Highlight(...ranges); //スプレッド構文でranges配列を展開し引数として渡す
+  CSS.highlights.set("tw-highlight", highlightRange);
+}
+
+function installHighlightStyle(): void {
+  const style = document.createElement("style");
+  style.textContent = `
+    ::highlight(tw-highlight) {
+      background-color: #ffff00;
+    }`;
+  document.head.append(style);
 }

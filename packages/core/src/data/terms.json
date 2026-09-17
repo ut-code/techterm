@@ -210,6 +210,434 @@
     "match": ["リファクタリング", "リファクタ"],
     "short": "動作を変えずに、コードを読みやすく整理すること。",
     "detail": "重複した処理をまとめたり、分かりにくい名前を直したりする。機能追加ではなく、今後の修正や開発をしやすくするために行う。"
+  },
+  {
+    "id": "object",
+    "term": "object",
+    "match": ["オブジェクト"],
+    "short": "複数のデータや処理をひとまとまりにしたもの。",
+    "detail": "JavaScript では、キーとバリューの組み合わせで情報を持つデータ構造。配列や関数もオブジェクトの一種として扱われる。",
+    "example": "const user = { name: 'Aki', age: 20 };",
+    "link": "https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object"
+  },
+  {
+    "id": "class",
+    "term": "class",
+    "match": ["クラス"],
+    "short": "同じ種類のオブジェクトを作るための設計図。",
+    "detail": "持たせるデータや使える処理をまとめて定義する。JavaScript では new と一緒に使うことで、クラスからインスタンスを作れる。",
+    "example": "class User { constructor(name) { this.name = name; } }",
+    "link": "https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes"
+  },
+  {
+    "id": "instance",
+    "term": "instance",
+    "match": ["インスタンス"],
+    "short": "クラスなどの設計をもとに実際に作られたオブジェクト。",
+    "detail": "同じクラスから複数作ることができ、それぞれが別のデータを持つ。JavaScript では new を使って作るのが代表的。",
+    "example": "const user = new User('Aki');"
+  },
+  {
+    "id": "key",
+    "term": "key",
+    "match": ["キー", "property name", "プロパティ名"],
+    "short": "オブジェクトなどから値を取り出すための名前。",
+    "detail": "JavaScript のオブジェクトでは、キーとバリューを組み合わせてデータを持つ。たとえば user.name の name がキーにあたる。",
+    "example": "const user = { name: 'Aki' };"
+  },
+  {
+    "id": "value",
+    "term": "value",
+    "match": ["バリュー", "値"],
+    "short": "変数やキーに対応して保存されているデータ。",
+    "detail": "文字列、数値、真偽値、オブジェクト、関数など、プログラムで扱う具体的な中身を指す。たとえば { name: 'Aki' } では 'Aki' がバリュー。",
+    "example": "const answer = 42;"
+  },
+  {
+    "id": "path",
+    "term": "path",
+    "match": ["パス", "ファイルパス"],
+    "short": "ファイルやディレクトリの場所を表す文字列。",
+    "detail": "ルートディレクトリから示す絶対パスと、カレントディレクトリなどを基準に示す相対パスがある。OS によって区切り文字が異なる。",
+    "example": "./src/index.js"
+  },
+  {
+    "id": "directory",
+    "term": "directory",
+    "match": ["ディレクトリ", "folder", "フォルダ"],
+    "short": "ファイルや別のディレクトリをまとめて置く場所。",
+    "detail": "階層構造で整理され、パスを使って場所を示す。GUI では一般にフォルダと呼ばれるものとほぼ同じ意味。",
+    "example": "src/components/"
+  },
+  {
+    "id": "root-directory",
+    "term": "root directory",
+    "match": ["ルートディレクトリ", "root folder", "ルートフォルダ"],
+    "short": "ディレクトリ階層のいちばん上にある場所。",
+    "detail": "ファイルシステム全体の起点を指す場合と、プロジェクトの最上位ディレクトリを指す場合がある。文脈によってどちらかを判断する。",
+    "example": "/"
+  },
+  {
+    "id": "current-directory",
+    "term": "current directory",
+    "match": ["カレントディレクトリ", "working directory", "作業ディレクトリ"],
+    "short": "プログラムやコマンドが現在の基準にしているディレクトリ。",
+    "detail": "相対パスはカレントディレクトリを起点に解釈される。ターミナルでは pwd、Node.js では process.cwd() で確認できる。",
+    "example": "process.cwd()"
+  },
+  {
+    "id": "javascript",
+    "term": "JavaScript",
+    "match": ["ジャバスクリプト", "JS"],
+    "short": "Web ページなどに動きや処理を加えるプログラミング言語。",
+    "detail": "ブラウザ上で画面の操作や通信を行えるほか、Node.js を使えばサーバやツールの開発にも使える。Java とは別の言語。",
+    "example": "const greeting = 'Hello'; console.log(greeting);",
+    "link": "https://developer.mozilla.org/ja/docs/Web/JavaScript"
+  },
+  {
+    "id": "typescript",
+    "term": "TypeScript",
+    "match": ["タイプスクリプト", "TS"],
+    "short": "JavaScript に型の仕組みを加えたプログラミング言語。",
+    "detail": "変数や関数が扱うデータの型を事前に検査できる。実行前に JavaScript へ変換されるため、ブラウザや Node.js で動かせる。",
+    "example": "const message: string = 'Hello';",
+    "link": "https://www.typescriptlang.org/docs/"
+  },
+  {
+    "id": "nodejs",
+    "term": "Node.js",
+    "match": ["Node", "NodeJS", "ノード", "ノードジェイエス"],
+    "short": "ブラウザの外で JavaScript を実行するための環境。",
+    "detail": "サーバ、コマンドラインツール、開発用ツールなどを JavaScript で作れる。npm を使って外部パッケージを導入できる。",
+    "example": "console.log(process.version);",
+    "link": "https://nodejs.org/ja"
+  },
+  {
+    "id": "vue",
+    "term": "Vue.js",
+    "match": ["Vue", "VueJS", "ビュー", "ビュージェイエス"],
+    "short": "Web の画面を部品に分けて作るための JavaScript フレームワーク。",
+    "detail": "データの変化に合わせて画面を自動で更新できる。HTML に近いテンプレートと、再利用できるコンポーネントを組み合わせて UI を作る。",
+    "example": "<template><h1>{{ message }}</h1></template>",
+    "link": "https://ja.vuejs.org/"
+  },
+  {
+    "id": "nextjs",
+    "term": "Next.js",
+    "match": ["Next", "NextJS", "ネクスト", "ネクストジェイエス"],
+    "short": "React を使った Web アプリ開発のためのフレームワーク。",
+    "detail": "ルーティング、サーバでの描画、データ取得、ビルドなどの機能をまとめて提供する。React 単体よりもアプリ全体の構成を作りやすい。",
+    "example": "export default function Page() { return <h1>Hello</h1>; }",
+    "link": "https://nextjs.org/docs"
+  },
+  {
+    "id": "react",
+    "term": "React",
+    "match": ["React.js", "ReactJS", "リアクト"],
+    "short": "Web の画面をコンポーネントとして作る JavaScript ライブラリ。",
+    "detail": "画面を小さな部品に分け、状態の変化に応じて表示を更新する。JSX を使うと JavaScript の中に HTML に似た構造を書ける。",
+    "example": "function Greeting() { return <h1>Hello</h1>; }",
+    "link": "https://ja.react.dev/"
+  },
+  {
+    "id": "python",
+    "term": "Python",
+    "match": ["パイソン"],
+    "short": "読みやすく簡潔な文法を持つプログラミング言語。",
+    "detail": "Web 開発、自動化、データ分析、AI など幅広い分野で使われる。処理のまとまりを波かっこではなくインデントで表す。",
+    "example": "print('Hello')",
+    "link": "https://docs.python.org/ja/3/"
+  },
+  {
+    "id": "ruby",
+    "term": "Ruby",
+    "match": ["ルビー"],
+    "short": "人が読み書きしやすいことを重視したプログラミング言語。",
+    "detail": "ほぼすべての値をオブジェクトとして扱う。Web フレームワークの Ruby on Rails と組み合わせた開発でもよく使われる。",
+    "example": "puts 'Hello'",
+    "link": "https://www.ruby-lang.org/ja/"
+  },
+  {
+    "id": "html",
+    "term": "HTML",
+    "match": ["エイチティーエムエル", "HyperText Markup Language"],
+    "short": "Web ページの内容と構造を記述するためのマークアップ言語。",
+    "detail": "見出し、文章、画像、リンクなどにタグで意味を与える。見た目は主に CSS、動きや処理は JavaScript と組み合わせて作る。",
+    "example": "<h1>Hello</h1>",
+    "link": "https://developer.mozilla.org/ja/docs/Web/HTML"
+  },
+  {
+    "id": "css",
+    "term": "CSS",
+    "match": ["シーエスエス", "Cascading Style Sheets"],
+    "short": "Web ページの見た目やレイアウトを指定するための言語。",
+    "detail": "HTML の要素を選び、色、文字サイズ、余白、配置などを設定する。画面幅に応じてデザインを変えることもできる。",
+    "example": "h1 { color: blue; }",
+    "link": "https://developer.mozilla.org/ja/docs/Web/CSS"
+  },
+  {
+    "id": "vscode",
+    "term": "Visual Studio Code",
+    "match": ["VS Code", "VSCode", "ブイエスコード"],
+    "short": "プログラムの作成や編集に使うソースコードエディタ。",
+    "detail": "補完、デバッグ、Git 連携、ターミナルなどの機能を備える。拡張機能を追加すると、言語や開発方法に合わせて機能を増やせる。",
+    "example": "code .",
+    "link": "https://code.visualstudio.com/docs"
+  },
+  {
+    "id": "nuxt",
+    "term": "Nuxt",
+    "match": ["Nuxt.js", "NuxtJS", "ナクスト"],
+    "short": "Vue を使った Web アプリ開発のためのフレームワーク。",
+    "detail": "ルーティング、サーバでの描画、データ取得、ビルドなどの機能をまとめて提供する。Vue を土台に、アプリ全体の構成を効率よく作れる。",
+    "example": "npx nuxi@latest init my-app",
+    "link": "https://nuxt.com/docs"
+  },
+  {
+    "id": "terminal",
+    "term": "terminal",
+    "match": ["ターミナル", "command line", "コマンドライン"],
+    "short": "文字でコマンドを入力してコンピュータを操作する画面。",
+    "detail": "ディレクトリの移動、プログラムの実行、Git の操作などをキーボードから行える。入力したコマンドはシェルによって解釈される。",
+    "example": "pwd"
+  },
+  {
+    "id": "github",
+    "term": "GitHub",
+    "match": ["ギットハブ"],
+    "short": "Git のリポジトリを保存・共有できるWebサービス。",
+    "detail": "コードの共同開発に必要なプルリクエスト、レビュー、Issue、Actions などの機能を提供する。Git そのものとは別のサービス。",
+    "link": "https://docs.github.com/ja"
+  },
+  {
+    "id": "git",
+    "term": "Git",
+    "match": ["ギット", "version control system", "バージョン管理システム"],
+    "short": "ファイルの変更履歴を記録・管理するためのツール。",
+    "detail": "いつ、誰が、何を変更したかをコミットとして残せる。ブランチを使った並行作業や、過去の状態への復元にも利用する。",
+    "example": "git status",
+    "link": "https://git-scm.com/doc"
+  },
+  {
+    "id": "commit",
+    "term": "commit",
+    "match": ["コミット", "git commit"],
+    "short": "Git でファイルの変更をひとまとまりとして記録すること。",
+    "detail": "変更内容にメッセージを付けてリポジトリの履歴に保存する。コミットごとに一意の識別子が割り当てられる。",
+    "example": "git commit -m \"ログイン画面を追加\"",
+    "link": "https://git-scm.com/docs/git-commit"
+  },
+  {
+    "id": "pull-request",
+    "term": "pull request",
+    "match": ["プルリクエスト", "PR", "プルリク"],
+    "short": "ブランチの変更を取り込み、レビューしてもらうための依頼。",
+    "detail": "GitHub などで変更内容や目的を共有し、コメントやレビューを受ける。承認後に対象のブランチへマージするのが一般的。",
+    "link": "https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"
+  },
+  {
+    "id": "merge",
+    "term": "merge",
+    "match": ["マージ", "git merge"],
+    "short": "別のブランチにある変更履歴をひとつに統合すること。",
+    "detail": "複数の開発作業を同じブランチへまとめるために使う。同じ箇所が異なる内容に変更されていると、競合の解決が必要になる。",
+    "example": "git merge feature/login",
+    "link": "https://git-scm.com/docs/git-merge"
+  },
+  {
+    "id": "git-pull",
+    "term": "git pull",
+    "match": ["pull", "プル"],
+    "short": "リモートリポジトリの変更を取得し、現在のブランチへ反映する操作。",
+    "detail": "内部では取得を行う fetch と、履歴を統合する merge または rebase が続けて実行される。作業中の変更がある場合は競合に注意する。",
+    "example": "git pull origin main",
+    "link": "https://git-scm.com/docs/git-pull"
+  },
+  {
+    "id": "git-push",
+    "term": "git push",
+    "match": ["push", "プッシュ"],
+    "short": "ローカルのコミットをリモートリポジトリへ送る操作。",
+    "detail": "自分の変更履歴を GitHub などの共有先へ反映する。リモート側に未取得の変更があると、そのままでは送れないことがある。",
+    "example": "git push origin main",
+    "link": "https://git-scm.com/docs/git-push"
+  },
+  {
+    "id": "git-clone",
+    "term": "git clone",
+    "match": ["clone", "クローン"],
+    "short": "リモートリポジトリを履歴ごと手元へ複製する操作。",
+    "detail": "ファイルだけでなくコミット履歴やブランチの情報も取得し、作業用ディレクトリを作る。既存プロジェクトの開発を始めるときによく使う。",
+    "example": "git clone https://github.com/user/repository.git",
+    "link": "https://git-scm.com/docs/git-clone"
+  },
+  {
+    "id": "git-checkout",
+    "term": "git checkout",
+    "match": ["checkout", "チェックアウト"],
+    "short": "ブランチを切り替えたり、ファイルを指定した状態へ戻したりする操作。",
+    "detail": "複数の役割を持つコマンド。ブランチの切り替えには git switch、ファイルの復元には git restore を使うと意図がより明確になる。",
+    "example": "git checkout main",
+    "link": "https://git-scm.com/docs/git-checkout"
+  },
+  {
+    "id": "git-fetch",
+    "term": "git fetch",
+    "match": ["fetch", "フェッチ"],
+    "short": "リモートリポジトリの最新情報を手元へ取得する操作。",
+    "detail": "リモート側のコミットやブランチ情報を取得するが、現在の作業ブランチには自動で統合しない。内容を確認してから merge や rebase で反映できる。",
+    "example": "git fetch origin",
+    "link": "https://git-scm.com/docs/git-fetch"
+  },
+  {
+    "id": "branch",
+    "term": "branch",
+    "match": ["ブランチ", "git branch"],
+    "short": "Git の変更履歴を枝分かれさせて作業する仕組み。",
+    "detail": "本体の履歴に影響を与えず、機能追加や修正を並行して進められる。作業が完了したら別のブランチへマージする。",
+    "example": "git branch feature/login",
+    "link": "https://git-scm.com/docs/git-branch"
+  },
+  {
+    "id": "repository",
+    "term": "repository",
+    "match": ["リポジトリ", "repo", "レポジトリ"],
+    "short": "Git がファイルと変更履歴をまとめて管理する場所。",
+    "detail": "自分のコンピュータにあるローカルリポジトリと、GitHub などに置くリモートリポジトリがある。一般にプロジェクト単位で作成する。",
+    "example": "git status",
+    "link": "https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%9F%BA%E6%9C%AC-Git-%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E5%8F%96%E5%BE%97"
+  },
+  {
+    "id": "git-init",
+    "term": "git init",
+    "match": ["init", "イニット", "初期化"],
+    "short": "現在のディレクトリを新しい Git リポジトリにする操作。",
+    "detail": "変更履歴や設定を保存する .git ディレクトリを作成する。まだ Git で管理されていないプロジェクトの管理を始めるときに使う。",
+    "example": "git init",
+    "link": "https://git-scm.com/docs/git-init"
+  },
+  {
+    "id": "staging-area",
+    "term": "staging area",
+    "match": ["stage", "staging", "ステージ", "ステージング", "index", "インデックス"],
+    "short": "次のコミットに含める変更を一時的に置く場所。",
+    "detail": "git add で変更をステージし、内容を確認してからコミットする。作業中の変更から、記録したいものだけを選べる。",
+    "example": "git add src/index.ts",
+    "link": "https://git-scm.com/docs/git-add"
+  },
+  {
+    "id": "html-id",
+    "term": "id attribute",
+    "match": ["id", "ID", "アイディー", "id属性"],
+    "short": "HTML 要素にページ内で固有の名前を付ける属性。",
+    "detail": "CSS の #名前というセレクタや JavaScript の getElementById から要素を指定できる。同じページ内で同じ id を重複させない。",
+    "example": "<main id=\"content\">...</main>",
+    "link": "https://developer.mozilla.org/ja/docs/Web/HTML/Reference/Global_attributes/id",
+    "langs": ["html", "css", "scss", "less", "vue", "javascriptreact", "typescriptreact"]
+  },
+  {
+    "id": "html-tag",
+    "term": "HTML tag",
+    "match": ["tag", "タグ", "HTMLタグ"],
+    "short": "HTML で要素の種類や範囲を示すための記号。",
+    "detail": "山かっこで囲んだ名前で、見出しや段落などコンテンツの意味を表す。多くの場合、開始タグと終了タグで内容を囲む。",
+    "example": "<p>Hello</p>",
+    "link": "https://developer.mozilla.org/ja/docs/Glossary/Tag",
+    "langs": ["html", "vue", "javascriptreact", "typescriptreact"]
+  },
+  {
+    "id": "css-margin",
+    "term": "margin",
+    "match": ["マージン", "外側の余白"],
+    "short": "CSS で要素の境界線より外側に作る余白。",
+    "detail": "上下左右をまとめて指定したり、margin-top のように個別指定したりできる。隣り合う上下のマージンは相殺されることがある。",
+    "example": ".card { margin: 16px; }",
+    "link": "https://developer.mozilla.org/ja/docs/Web/CSS/margin",
+    "langs": ["css", "scss", "less"]
+  },
+  {
+    "id": "css-border",
+    "term": "border",
+    "match": ["ボーダー", "境界線"],
+    "short": "CSS で要素の周囲に表示する境界線。",
+    "detail": "線の太さ、種類、色をまとめて指定できる。border-radius を加えると、境界線の角を丸くできる。",
+    "example": ".card { border: 1px solid #ccc; }",
+    "link": "https://developer.mozilla.org/ja/docs/Web/CSS/border",
+    "langs": ["css", "scss", "less"]
+  },
+  {
+    "id": "css-padding",
+    "term": "padding",
+    "match": ["パディング", "内側の余白"],
+    "short": "CSS で要素の内容と境界線の間に作る余白。",
+    "detail": "上下左右をまとめて指定したり、padding-top のように個別指定したりできる。margin と違い、要素の背景は padding の領域にも表示される。",
+    "example": ".card { padding: 16px; }",
+    "link": "https://developer.mozilla.org/ja/docs/Web/CSS/padding",
+    "langs": ["css", "scss", "less"]
+  },
+  {
+    "id": "css-height",
+    "term": "height",
+    "match": ["ハイト", "高さ"],
+    "short": "CSS で要素の高さを指定するプロパティ。",
+    "detail": "px、%、vh などの単位や auto を使って指定する。初期設定では内容領域の高さを表すが、box-sizing の設定によって計算方法が変わる。",
+    "example": ".hero { height: 100vh; }",
+    "link": "https://developer.mozilla.org/ja/docs/Web/CSS/height",
+    "langs": ["css", "scss", "less"]
+  },
+  {
+    "id": "css-width",
+    "term": "width",
+    "match": ["ウィズ", "幅"],
+    "short": "CSS で要素の横幅を指定するプロパティ。",
+    "detail": "px、%、vw などの単位や auto を使って指定する。画面幅に合わせる場合は、max-width や min-width と組み合わせることも多い。",
+    "example": ".container { width: 100%; max-width: 960px; }",
+    "link": "https://developer.mozilla.org/ja/docs/Web/CSS/width",
+    "langs": ["css", "scss", "less"]
+  },
+  {
+    "id": "box-model",
+    "term": "box model",
+    "match": ["ボックスモデル", "CSS box model"],
+    "short": "HTML 要素を四角い領域として扱う CSS の考え方。",
+    "detail": "内側から content、padding、border、margin の領域で構成される。要素全体の大きさを正しく計算するときに重要になる。",
+    "example": ".card { box-sizing: border-box; }",
+    "link": "https://developer.mozilla.org/ja/docs/Learn_web_development/Core/Styling_basics/Box_model",
+    "langs": ["css", "scss", "less"]
+  },
+  {
+    "id": "responsive-web-design",
+    "term": "responsive web design",
+    "match": ["レスポンシブウェブデザイン", "responsive design", "レスポンシブデザイン", "RWD"],
+    "short": "画面の大きさに応じてレイアウトを調整する設計手法。",
+    "detail": "柔軟な幅、メディアクエリ、可変画像などを使い、スマートフォンから大きな画面まで見やすく操作しやすい表示を作る。",
+    "example": "@media (max-width: 600px) { .menu { display: none; } }",
+    "link": "https://developer.mozilla.org/ja/docs/Learn_web_development/Core/CSS_layout/Responsive_Design"
+  },
+  {
+    "id": "npm",
+    "term": "npm",
+    "match": ["エヌピーエム"],
+    "short": "Node.js のパッケージを管理するためのツール。",
+    "detail": "外部ライブラリのインストール、バージョン管理、スクリプトの実行などに使う。プロジェクトの設定や依存関係は主に package.json に記録される。",
+    "example": "npm install",
+    "link": "https://docs.npmjs.com/about-npm"
+  },
+  {
+    "id": "ubuntu",
+    "term": "Ubuntu",
+    "match": ["ウブンツ"],
+    "short": "使いやすさを重視して作られた Linux ディストリビューション。",
+    "detail": "デスクトップやサーバ、クラウド環境で利用される。ソフトウェアの導入や更新には apt というパッケージ管理ツールを使える。",
+    "example": "sudo apt update",
+    "link": "https://ubuntu.com/about"
+  },
+  {
+    "id": "component",
+    "term": "component",
+    "match": ["コンポーネント", "UI component", "UIコンポーネント"],
+    "short": "画面を構成する再利用可能な部品。",
+    "detail": "ボタン、入力欄、ヘッダーなどを独立した単位として作り、組み合わせて画面を構築する。見た目や処理をまとめることで保守しやすくなる。",
+    "example": "<Button label=\"保存\" />"
   }
-  
 ]

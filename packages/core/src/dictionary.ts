@@ -74,6 +74,27 @@ export class Dictionary {
     }
     return undefined;
   }
+
+  findAll(text: string, options: LookupOptions = {}): Match[] {
+    const tokens = tokenize(text);
+    const matches: Match[] = [];
+    for (let start = 0; start < tokens.length; start++) {
+      for (let len = MAX_PHRASE_TOKENS; len >= 1; len--) {
+        if (start + len > tokens.length) continue;
+        const window = tokens.slice(start, start + len);
+        if (!isContiguous(text, window)) continue;
+
+        const phrase = window.map((t) => t.text).join(' ');
+        const entry = this.lookup(phrase, options);
+        if (entry) {
+          matches.push({ entry, start: window[0].start, end: window[window.length - 1].end });
+          start += len - 1; //forループでstartが++されることを考慮する
+          break;
+        }
+      }
+    }
+    return matches;
+  }
 }
 
 /** 窓内のトークンが空白・ハイフン程度でしか隔てられていないか。 */

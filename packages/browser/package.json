@@ -1,16 +1,18 @@
 {
   "name": "@techword/browser",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "private": true,
   "typescript": "^6.0.3",
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit && esbuild src/content.ts src/background.ts src/sidepanel.ts --bundle --outdir=dist --format=iife --target=chrome114 && cp manifest.json sidepanel.html sidepanel.css dist/",
-    "watch": "mkdir -p dist && cp manifest.json sidepanel.html sidepanel.css dist/ && esbuild src/content.ts src/background.ts src/sidepanel.ts --bundle --outdir=dist --format=iife --target=chrome114 --watch"
+    "watch": "mkdir -p dist && cp manifest.json sidepanel.html sidepanel.css dist/ && esbuild src/content.ts src/background.ts src/sidepanel.ts --bundle --outdir=dist --format=iife --target=chrome114 --watch",
+    "test": "node --test tests/*.test.cjs"
   },
   "dependencies": {
     "@techword/core": "*"
   },
   "devDependencies": {
-    "@types/chrome": "^0.2.9"
+    "@types/chrome": "^0.2.9",
+    "jsdom": "^26.1.0"
   }
 }

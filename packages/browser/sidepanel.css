@@ -132,3 +132,16 @@ button:disabled {
   color: #c62828;
   font-size: 13px;
 }
+
+[hidden] { display: none !important; }
+.term-settings { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid color-mix(in srgb, CanvasText 18%, transparent); }
+.term-settings summary { padding: 6px 0; cursor: pointer; }
+.term-settings summary:focus-visible { outline: 2px solid Highlight; outline-offset: 4px; border-radius: 4px; }
+.term-settings h2 { display: inline; font-size: 18px; }
+.settings-description, .settings-note, .settings-status { margin-top: 8px; font-size: 12px; line-height: 1.6; color: GrayText; }
+.term-categories { display: grid; gap: 4px; margin-top: 12px; }
+.category-row { display: flex; align-items: center; gap: 10px; padding: 9px 6px; font-size: 13px; cursor: pointer; }
+.category-row:hover { background: color-mix(in srgb, CanvasText 6%, transparent); border-radius: 6px; }
+.category-row input { width: 17px; height: 17px; margin: 0; flex: none; accent-color: #4272d7; }
+.category-row input:focus-visible { outline: 2px solid Highlight; outline-offset: 3px; }
+.category-count { margin-left: auto; color: GrayText; white-space: nowrap; }

@@ -1,7 +1,11 @@
 import { Dictionary, builtinTerms, type Match } from '@techword/core';
+import { observeCategorySettings } from './category-settings';
+import { IncrementalHighlighter, isSearchableText } from './highlighter';
 import { getFavoriteIds, toggleFavorite, watchFavoriteIds } from './favorites';
 
-const dictionary = new Dictionary(builtinTerms);
+let dictionary = new Dictionary([]);
+let highlighter: IncrementalHighlighter | undefined;
+installHighlightStyle();
 
 /** ホバーしてから出すまでの待ち時間。すぐ出すとポインタを動かすたびに点滅する。 */
 const HOVER_DELAY_MS = 250;
@@ -12,6 +16,14 @@ let currentId: string | undefined;
 let currentFavoriteButton: HTMLButtonElement | undefined;
 let favoriteIds = new Set<string>();
 let pointerInsideTooltip = false;
+
+observeCategorySettings((settings) => {
+  dictionary = new Dictionary(builtinTerms.filter((entry) => settings[entry.category ?? 'basics']));
+  window.clearTimeout(hoverTimer);
+  hide();
+  if (highlighter) highlighter.setDictionary(dictionary);
+  else highlighter = new IncrementalHighlighter(dictionary);
+}, (error) => console.error('TechTerm: 表示設定を読み込めませんでした。', error));
 
 void getFavoriteIds()
   .then((ids) => {
@@ -43,9 +55,11 @@ tooltip.host.addEventListener('pointerleave', () => {
 });
 
 function handleHover(event: MouseEvent): void {
+  if (tooltip.host.style.display === 'block' && tooltip.host.matches(':hover')) return; // ツールチップ上にマウスがあるときはツールチップを消さないようにする
   const caret = caretFromPoint(event.clientX, event.clientY);
   if (!caret || caret.node.nodeType !== Node.TEXT_NODE) return hide();
 
+  if (!isSearchableText(caret.node as Text)) return hide();
   const text = caret.node.textContent ?? '';
   const hit = dictionary.findAt(text, caret.offset);
   if (!hit) return hide();
@@ -148,6 +162,7 @@ function render({ entry }: Match): void {
 /** ページ側の CSS に影響されないよう Shadow DOM に閉じ込める。 */
 function createTooltip(): { host: HTMLElement; panel: HTMLElement } {
   const host = document.createElement('div');
+  host.dataset.techtermUi = '';
   host.style.cssText = 'position:fixed;z-index:2147483647;display:none;';
   const root = host.attachShadow({ mode: 'closed' });
 
@@ -218,4 +233,13 @@ function caretFromPoint(x: number, y: number): { node: Node; offset: number } | 
   if (pos) return { node: pos.offsetNode, offset: pos.offset };
 
   return undefined;
+}
+
+function installHighlightStyle(): void {
+  const style = document.createElement("style");
+  style.textContent = `
+    ::highlight(tw-highlight) {
+      background-color: rgba(255, 220, 100, 0.2);
+    }`;
+  document.head.append(style);
 }

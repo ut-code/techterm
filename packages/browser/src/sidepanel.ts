@@ -1,4 +1,5 @@
-import { builtinTerms, type TermEntry } from '@techword/core';
+import { defaultCategorySettings, observeCategorySettings, setCategoryEnabled } from './category-settings';
+import { builtinTerms, termCategories, type TermCategory, type TermEntry } from '@techword/core';
 import {
   clearFavorites,
   getFavoriteIds,
@@ -117,3 +118,61 @@ function showError(message: string, error: unknown): void {
   errorMessage.textContent = message;
   errorMessage.hidden = false;
 }
+
+const categoryList = requireElement<HTMLDivElement>('term-categories');
+const settingsStatus = requireElement<HTMLParagraphElement>('settings-status');
+const settingsError = requireElement<HTMLParagraphElement>('settings-error');
+let categorySettings = defaultCategorySettings();
+const categoryInputs = new Map<TermCategory, HTMLInputElement>();
+const savingCategories = new Set<TermCategory>();
+
+for (const { id, label } of termCategories) {
+  const row = document.createElement('label');
+  row.className = 'category-row';
+  const input = document.createElement('input');
+  input.type = 'checkbox';
+  input.disabled = true;
+  const name = document.createElement('span');
+  name.textContent = label;
+  const count = document.createElement('span');
+  count.className = 'category-count';
+  count.textContent = `${builtinTerms.filter((entry) => (entry.category ?? 'basics') === id).length}語`;
+  row.append(input, name, count);
+  categoryList.append(row);
+  categoryInputs.set(id, input);
+  input.addEventListener('change', async () => {
+    const enabled = input.checked;
+    savingCategories.add(id);
+    input.disabled = true;
+    settingsError.hidden = true;
+    settingsStatus.textContent = '保存中…';
+    try {
+      await setCategoryEnabled(id, enabled);
+      // 確定した表示状態はstorage.onChangedから反映する。
+      settingsStatus.textContent = '保存しました。開いているページにも反映されます。';
+    } catch (error: unknown) {
+      input.checked = categorySettings[id];
+      settingsStatus.textContent = '';
+      settingsError.textContent = '表示設定を保存できませんでした。もう一度お試しください。';
+      settingsError.hidden = false;
+      console.error('TechTerm: 表示設定を保存できませんでした。', error);
+    } finally {
+      savingCategories.delete(id);
+      input.disabled = false;
+    }
+  });
+}
+
+observeCategorySettings((settings) => {
+  categorySettings = settings;
+  for (const [id, input] of categoryInputs) {
+    input.checked = settings[id];
+    input.disabled = savingCategories.has(id);
+  }
+  const enabledCount = builtinTerms.filter((entry) => settings[entry.category ?? 'basics']).length;
+  settingsStatus.textContent = `${enabledCount} / ${builtinTerms.length}語が有効`;
+}, (error) => {
+  settingsError.textContent = '表示設定を読み込めませんでした。';
+  settingsError.hidden = false;
+  console.error('TechTerm: 表示設定を読み込めませんでした。', error);
+});

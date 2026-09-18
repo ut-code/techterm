@@ -3,11 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TechTerm お気に入り</title>
+    <title>TechTerm</title>
     <link rel="stylesheet" href="sidepanel.css" />
   </head>
   <body>
     <main>
+      <details class="term-settings">
+        <summary><h2 id="settings-title">表示する用語</h2></summary>
+        <p class="settings-description">チェックしたカテゴリの用語を強調表示し、カーソルを合わせると説明を表示します。</p>
+        <div id="term-categories" class="term-categories" role="group" aria-labelledby="settings-title"></div>
+        <p id="settings-status" class="settings-status" role="status" aria-live="polite">設定を読み込み中…</p>
+        <p id="settings-error" class="error" role="alert" hidden></p>
+        <p class="settings-note">カテゴリを無効にしても、お気に入りは残ります。</p>
+      </details>
       <header>
         <div>
           <h1>お気に入り</h1>

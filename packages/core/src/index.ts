@@ -12,3 +12,6 @@ export const builtinTerms: readonly TermEntry[] = termsData as TermEntry[];
 
 /** 同梱辞書だけで作った既定の Dictionary。 */
 export const builtinDictionary = new Dictionary(builtinTerms);
+
+export { termCategories } from './categories';
+export type { TermCategory } from './categories';

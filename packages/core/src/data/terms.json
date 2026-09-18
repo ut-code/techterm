@@ -1,6 +1,7 @@
 [
   {
     "id": "closure",
+    "category": "javascript",
     "term": "closure",
     "match": ["クロージャ", "クロージャー"],
     "short": "自分が作られた場所の変数を覚えている関数。",
@@ -10,6 +11,7 @@
   },
   {
     "id": "idempotent",
+    "category": "design-performance",
     "term": "idempotent",
     "match": ["冪等", "べき等", "idempotency"],
     "short": "何回実行しても結果が同じになる性質。",
@@ -17,6 +19,7 @@
   },
   {
     "id": "race-condition",
+    "category": "design-performance",
     "term": "race condition",
     "match": ["競合状態", "レースコンディション"],
     "short": "処理の実行順序次第で結果が変わってしまうバグ。",
@@ -24,6 +27,7 @@
   },
   {
     "id": "memoization",
+    "category": "design-performance",
     "term": "memoization",
     "match": ["メモ化", "memoize", "memo"],
     "short": "一度計算した結果を覚えておいて使い回すこと。",
@@ -31,6 +35,7 @@
   },
   {
     "id": "gc",
+    "category": "design-performance",
     "term": "garbage collection",
     "match": ["GC", "ガベージコレクション", "ガベコレ"],
     "short": "使われなくなったメモリを自動で回収する仕組み。",
@@ -38,6 +43,7 @@
   },
   {
     "id": "immutable",
+    "category": "design-performance",
     "term": "immutable",
     "match": ["イミュータブル", "不変", "immutability"],
     "short": "作った後に中身を書き換えられないデータ。",
@@ -45,6 +51,7 @@
   },
   {
     "id": "dependency-injection",
+    "category": "design-performance",
     "term": "dependency injection",
     "match": ["DI", "依存性注入"],
     "short": "使う部品を自分で作らず、外から渡してもらう設計。",
@@ -52,6 +59,7 @@
   },
   {
     "id": "middleware",
+    "category": "network-data",
     "term": "middleware",
     "match": ["ミドルウェア"],
     "short": "リクエストと本処理の間に挟まる共通処理。",
@@ -59,6 +67,7 @@
   },
   {
     "id": "polyfill",
+    "category": "javascript",
     "term": "polyfill",
     "match": ["ポリフィル"],
     "short": "古い環境に新しい機能を後付けするコード。",
@@ -66,6 +75,7 @@
   },
   {
     "id": "hoisting",
+    "category": "javascript",
     "term": "hoisting",
     "match": ["巻き上げ", "ホイスティング"],
     "short": "宣言がスコープの先頭に持ち上げられる挙動。",
@@ -74,6 +84,7 @@
   },
   {
     "id": "use-state",
+    "category": "frameworks",
     "term": "useState",
     "match": ["ユーズステート"],
     "short": "React で「変わる値」を持つためのフック。",
@@ -84,6 +95,7 @@
   },
   {
     "id": "use-effect",
+    "category": "frameworks",
     "term": "useEffect",
     "short": "React で描画のあとに副作用を走らせるフック。",
     "detail": "通信・購読・DOM 操作など、描画そのものではない処理を置く。第 2 引数の依存配列に入れた値が変わったときだけ再実行される。",
@@ -92,6 +104,7 @@
   },
   {
     "id": "promise",
+    "category": "javascript",
     "term": "Promise",
     "match": ["プロミス"],
     "short": "「あとで結果が入る箱」を表すオブジェクト。",
@@ -100,6 +113,7 @@
   },
   {
     "id": "generic",
+    "category": "javascript",
     "term": "generics",
     "match": ["ジェネリクス", "generic", "型引数"],
     "short": "型を後から差し込めるようにする仕組み。",
@@ -107,6 +121,7 @@
   },
   {
     "id": "type-guard",
+    "category": "javascript",
     "term": "type guard",
     "match": ["型ガード"],
     "short": "実行時のチェックで型を絞り込む書き方。",
@@ -115,6 +130,7 @@
   },
   {
     "id": "orm",
+    "category": "network-data",
     "term": "ORM",
     "match": ["オーアールエム", "object relational mapping"],
     "short": "DB のテーブルをコードのオブジェクトとして扱う道具。",
@@ -122,6 +138,7 @@
   },
   {
     "id": "n-plus-one",
+    "category": "network-data",
     "term": "N+1 problem",
     "match": ["N+1", "エヌプラスワン"],
     "short": "一覧を出すたびに件数ぶん追加クエリが飛ぶ性能問題。",
@@ -129,6 +146,7 @@
   },
   {
     "id": "idempotency-key",
+    "category": "design-performance",
     "term": "idempotency key",
     "match": ["冪等キー"],
     "short": "同じリクエストの二重実行を防ぐための識別子。",
@@ -136,6 +154,7 @@
   },
   {
     "id": "cors",
+    "category": "network-data",
     "term": "CORS",
     "match": ["オリジン間リソース共有", "cross origin resource sharing"],
     "short": "別ドメインへのブラウザからの通信を許可する仕組み。",
@@ -143,6 +162,7 @@
   },
   {
     "id": "jwt",
+    "category": "network-data",
     "term": "JWT",
     "match": ["json web token", "ジョット"],
     "short": "署名つきで中身を自分で検証できるトークン。",
@@ -150,6 +170,7 @@
   },
   {
     "id": "migration",
+    "category": "network-data",
     "term": "migration",
     "match": ["マイグレーション", "マイグレ"],
     "short": "DB のスキーマ変更を手順として記録したファイル。",
@@ -157,6 +178,7 @@
   },
   {
     "id": "debounce",
+    "category": "design-performance",
     "term": "debounce",
     "match": ["デバウンス"],
     "short": "連続した呼び出しを、止まってから 1 回にまとめる。",
@@ -164,6 +186,7 @@
   },
   {
     "id": "throttle",
+    "category": "design-performance",
     "term": "throttle",
     "match": ["スロットル", "スロットリング", "throttling"],
     "short": "呼び出しの頻度を一定間隔までに制限する。",
@@ -171,6 +194,7 @@
   },
   {
     "id": "exponential-backoff",
+    "category": "design-performance",
     "term": "exponential backoff",
     "match": ["指数バックオフ", "backoff"],
     "short": "リトライ間隔を 1秒, 2秒, 4秒…と伸ばしていく方式。",
@@ -178,6 +202,7 @@
   },
   {
     "id": "single-source-of-truth",
+    "category": "design-performance",
     "term": "single source of truth",
     "match": ["SSOT", "信頼できる唯一の情報源"],
     "short": "同じ情報の正本を 1 箇所だけに持つ設計方針。",
@@ -185,6 +210,7 @@
   },
   {
     "id": "feature-flag",
+    "category": "design-performance",
     "term": "feature flag",
     "match": ["フィーチャーフラグ", "feature toggle", "機能フラグ"],
     "short": "コードを出したまま機能のオン/オフを切り替える仕組み。",
@@ -192,6 +218,7 @@
   },
   {
     "id": "cache",
+    "category": "design-performance",
     "term": "cache",
     "match": ["キャッシュ", "caching"],
     "short": "一度取得・計算したデータを保存し、次回から素早く使う仕組み。",
@@ -199,6 +226,7 @@
   },
   {
     "id": "api",
+    "category": "network-data",
     "term": "API",
     "match": ["エーピーアイ", "application programming interface"],
     "short": "ソフトウェア同士が機能やデータをやり取りするための窓口。",
@@ -206,6 +234,7 @@
   },
   {
     "id": "refactoring",
+    "category": "design-performance",
     "term": "refactoring",
     "match": ["リファクタリング", "リファクタ"],
     "short": "動作を変えずに、コードを読みやすく整理すること。",
@@ -213,6 +242,7 @@
   },
   {
     "id": "object",
+    "category": "basics",
     "term": "object",
     "match": ["オブジェクト"],
     "short": "複数のデータや処理をひとまとまりにしたもの。",
@@ -222,6 +252,7 @@
   },
   {
     "id": "class",
+    "category": "basics",
     "term": "class",
     "match": ["クラス"],
     "short": "同じ種類のオブジェクトを作るための設計図。",
@@ -231,6 +262,7 @@
   },
   {
     "id": "instance",
+    "category": "basics",
     "term": "instance",
     "match": ["インスタンス"],
     "short": "クラスなどの設計をもとに実際に作られたオブジェクト。",
@@ -239,6 +271,7 @@
   },
   {
     "id": "key",
+    "category": "basics",
     "term": "key",
     "match": ["キー", "property name", "プロパティ名"],
     "short": "オブジェクトなどから値を取り出すための名前。",
@@ -247,6 +280,7 @@
   },
   {
     "id": "value",
+    "category": "basics",
     "term": "value",
     "match": ["バリュー", "値"],
     "short": "変数やキーに対応して保存されているデータ。",
@@ -255,6 +289,7 @@
   },
   {
     "id": "path",
+    "category": "development",
     "term": "path",
     "match": ["パス", "ファイルパス"],
     "short": "ファイルやディレクトリの場所を表す文字列。",
@@ -263,6 +298,7 @@
   },
   {
     "id": "directory",
+    "category": "development",
     "term": "directory",
     "match": ["ディレクトリ", "folder", "フォルダ"],
     "short": "ファイルや別のディレクトリをまとめて置く場所。",
@@ -271,6 +307,7 @@
   },
   {
     "id": "root-directory",
+    "category": "development",
     "term": "root directory",
     "match": ["ルートディレクトリ", "root folder", "ルートフォルダ"],
     "short": "ディレクトリ階層のいちばん上にある場所。",
@@ -279,6 +316,7 @@
   },
   {
     "id": "current-directory",
+    "category": "development",
     "term": "current directory",
     "match": ["カレントディレクトリ", "working directory", "作業ディレクトリ"],
     "short": "プログラムやコマンドが現在の基準にしているディレクトリ。",
@@ -287,6 +325,7 @@
   },
   {
     "id": "javascript",
+    "category": "javascript",
     "term": "JavaScript",
     "match": ["ジャバスクリプト", "JS"],
     "short": "Web ページなどに動きや処理を加えるプログラミング言語。",
@@ -296,6 +335,7 @@
   },
   {
     "id": "typescript",
+    "category": "javascript",
     "term": "TypeScript",
     "match": ["タイプスクリプト", "TS"],
     "short": "JavaScript に型の仕組みを加えたプログラミング言語。",
@@ -305,6 +345,7 @@
   },
   {
     "id": "nodejs",
+    "category": "javascript",
     "term": "Node.js",
     "match": ["Node", "NodeJS", "ノード", "ノードジェイエス"],
     "short": "ブラウザの外で JavaScript を実行するための環境。",
@@ -314,6 +355,7 @@
   },
   {
     "id": "vue",
+    "category": "frameworks",
     "term": "Vue.js",
     "match": ["Vue", "VueJS", "ビュー", "ビュージェイエス"],
     "short": "Web の画面を部品に分けて作るための JavaScript フレームワーク。",
@@ -323,6 +365,7 @@
   },
   {
     "id": "nextjs",
+    "category": "frameworks",
     "term": "Next.js",
     "match": ["Next", "NextJS", "ネクスト", "ネクストジェイエス"],
     "short": "React を使った Web アプリ開発のためのフレームワーク。",
@@ -332,6 +375,7 @@
   },
   {
     "id": "react",
+    "category": "frameworks",
     "term": "React",
     "match": ["React.js", "ReactJS", "リアクト"],
     "short": "Web の画面をコンポーネントとして作る JavaScript ライブラリ。",
@@ -341,6 +385,7 @@
   },
   {
     "id": "python",
+    "category": "basics",
     "term": "Python",
     "match": ["パイソン"],
     "short": "読みやすく簡潔な文法を持つプログラミング言語。",
@@ -350,6 +395,7 @@
   },
   {
     "id": "ruby",
+    "category": "basics",
     "term": "Ruby",
     "match": ["ルビー"],
     "short": "人が読み書きしやすいことを重視したプログラミング言語。",
@@ -359,6 +405,7 @@
   },
   {
     "id": "html",
+    "category": "html-css",
     "term": "HTML",
     "match": ["エイチティーエムエル", "HyperText Markup Language"],
     "short": "Web ページの内容と構造を記述するためのマークアップ言語。",
@@ -368,6 +415,7 @@
   },
   {
     "id": "css",
+    "category": "html-css",
     "term": "CSS",
     "match": ["シーエスエス", "Cascading Style Sheets"],
     "short": "Web ページの見た目やレイアウトを指定するための言語。",
@@ -377,6 +425,7 @@
   },
   {
     "id": "vscode",
+    "category": "development",
     "term": "Visual Studio Code",
     "match": ["VS Code", "VSCode", "ブイエスコード"],
     "short": "プログラムの作成や編集に使うソースコードエディタ。",
@@ -386,6 +435,7 @@
   },
   {
     "id": "nuxt",
+    "category": "frameworks",
     "term": "Nuxt",
     "match": ["Nuxt.js", "NuxtJS", "ナクスト"],
     "short": "Vue を使った Web アプリ開発のためのフレームワーク。",
@@ -395,6 +445,7 @@
   },
   {
     "id": "terminal",
+    "category": "development",
     "term": "terminal",
     "match": ["ターミナル", "command line", "コマンドライン"],
     "short": "文字でコマンドを入力してコンピュータを操作する画面。",
@@ -403,6 +454,7 @@
   },
   {
     "id": "github",
+    "category": "development",
     "term": "GitHub",
     "match": ["ギットハブ"],
     "short": "Git のリポジトリを保存・共有できるWebサービス。",
@@ -411,6 +463,7 @@
   },
   {
     "id": "git",
+    "category": "development",
     "term": "Git",
     "match": ["ギット", "version control system", "バージョン管理システム"],
     "short": "ファイルの変更履歴を記録・管理するためのツール。",
@@ -420,6 +473,7 @@
   },
   {
     "id": "commit",
+    "category": "development",
     "term": "commit",
     "match": ["コミット", "git commit"],
     "short": "Git でファイルの変更をひとまとまりとして記録すること。",
@@ -429,6 +483,7 @@
   },
   {
     "id": "pull-request",
+    "category": "development",
     "term": "pull request",
     "match": ["プルリクエスト", "PR", "プルリク"],
     "short": "ブランチの変更を取り込み、レビューしてもらうための依頼。",
@@ -437,6 +492,7 @@
   },
   {
     "id": "merge",
+    "category": "development",
     "term": "merge",
     "match": ["マージ", "git merge"],
     "short": "別のブランチにある変更履歴をひとつに統合すること。",
@@ -446,6 +502,7 @@
   },
   {
     "id": "git-pull",
+    "category": "development",
     "term": "git pull",
     "match": ["pull", "プル"],
     "short": "リモートリポジトリの変更を取得し、現在のブランチへ反映する操作。",
@@ -455,6 +512,7 @@
   },
   {
     "id": "git-push",
+    "category": "development",
     "term": "git push",
     "match": ["push", "プッシュ"],
     "short": "ローカルのコミットをリモートリポジトリへ送る操作。",
@@ -464,6 +522,7 @@
   },
   {
     "id": "git-clone",
+    "category": "development",
     "term": "git clone",
     "match": ["clone", "クローン"],
     "short": "リモートリポジトリを履歴ごと手元へ複製する操作。",
@@ -473,6 +532,7 @@
   },
   {
     "id": "git-checkout",
+    "category": "development",
     "term": "git checkout",
     "match": ["checkout", "チェックアウト"],
     "short": "ブランチを切り替えたり、ファイルを指定した状態へ戻したりする操作。",
@@ -482,6 +542,7 @@
   },
   {
     "id": "git-fetch",
+    "category": "development",
     "term": "git fetch",
     "match": ["fetch", "フェッチ"],
     "short": "リモートリポジトリの最新情報を手元へ取得する操作。",
@@ -491,6 +552,7 @@
   },
   {
     "id": "branch",
+    "category": "development",
     "term": "branch",
     "match": ["ブランチ", "git branch"],
     "short": "Git の変更履歴を枝分かれさせて作業する仕組み。",
@@ -500,6 +562,7 @@
   },
   {
     "id": "repository",
+    "category": "development",
     "term": "repository",
     "match": ["リポジトリ", "repo", "レポジトリ"],
     "short": "Git がファイルと変更履歴をまとめて管理する場所。",
@@ -509,6 +572,7 @@
   },
   {
     "id": "git-init",
+    "category": "development",
     "term": "git init",
     "match": ["init", "イニット", "初期化"],
     "short": "現在のディレクトリを新しい Git リポジトリにする操作。",
@@ -518,6 +582,7 @@
   },
   {
     "id": "staging-area",
+    "category": "development",
     "term": "staging area",
     "match": ["stage", "staging", "ステージ", "ステージング", "index", "インデックス"],
     "short": "次のコミットに含める変更を一時的に置く場所。",
@@ -527,6 +592,7 @@
   },
   {
     "id": "html-id",
+    "category": "html-css",
     "term": "id attribute",
     "match": ["id", "ID", "アイディー", "id属性"],
     "short": "HTML 要素にページ内で固有の名前を付ける属性。",
@@ -537,6 +603,7 @@
   },
   {
     "id": "html-tag",
+    "category": "html-css",
     "term": "HTML tag",
     "match": ["tag", "タグ", "HTMLタグ"],
     "short": "HTML で要素の種類や範囲を示すための記号。",
@@ -547,6 +614,7 @@
   },
   {
     "id": "css-margin",
+    "category": "html-css",
     "term": "margin",
     "match": ["マージン", "外側の余白"],
     "short": "CSS で要素の境界線より外側に作る余白。",
@@ -557,6 +625,7 @@
   },
   {
     "id": "css-border",
+    "category": "html-css",
     "term": "border",
     "match": ["ボーダー", "境界線"],
     "short": "CSS で要素の周囲に表示する境界線。",
@@ -567,6 +636,7 @@
   },
   {
     "id": "css-padding",
+    "category": "html-css",
     "term": "padding",
     "match": ["パディング", "内側の余白"],
     "short": "CSS で要素の内容と境界線の間に作る余白。",
@@ -577,6 +647,7 @@
   },
   {
     "id": "css-height",
+    "category": "html-css",
     "term": "height",
     "match": ["ハイト", "高さ"],
     "short": "CSS で要素の高さを指定するプロパティ。",
@@ -587,6 +658,7 @@
   },
   {
     "id": "css-width",
+    "category": "html-css",
     "term": "width",
     "match": ["ウィズ", "幅"],
     "short": "CSS で要素の横幅を指定するプロパティ。",
@@ -597,6 +669,7 @@
   },
   {
     "id": "box-model",
+    "category": "html-css",
     "term": "box model",
     "match": ["ボックスモデル", "CSS box model"],
     "short": "HTML 要素を四角い領域として扱う CSS の考え方。",
@@ -607,6 +680,7 @@
   },
   {
     "id": "responsive-web-design",
+    "category": "html-css",
     "term": "responsive web design",
     "match": ["レスポンシブウェブデザイン", "responsive design", "レスポンシブデザイン", "RWD"],
     "short": "画面の大きさに応じてレイアウトを調整する設計手法。",
@@ -616,6 +690,7 @@
   },
   {
     "id": "npm",
+    "category": "development",
     "term": "npm",
     "match": ["エヌピーエム"],
     "short": "Node.js のパッケージを管理するためのツール。",
@@ -625,6 +700,7 @@
   },
   {
     "id": "ubuntu",
+    "category": "development",
     "term": "Ubuntu",
     "match": ["ウブンツ"],
     "short": "使いやすさを重視して作られた Linux ディストリビューション。",
@@ -634,10 +710,839 @@
   },
   {
     "id": "component",
+    "category": "frameworks",
     "term": "component",
     "match": ["コンポーネント", "UI component", "UIコンポーネント"],
     "short": "画面を構成する再利用可能な部品。",
     "detail": "ボタン、入力欄、ヘッダーなどを独立した単位として作り、組み合わせて画面を構築する。見た目や処理をまとめることで保守しやすくなる。",
     "example": "<Button label=\"保存\" />"
+  },
+  {
+    "id": "variable",
+    "category": "basics",
+    "term": "variable",
+    "match": [
+      "変数",
+      "バリアブル"
+    ],
+    "short": "値に名前を付けて、プログラムの中で参照するためのもの。",
+    "detail": "言語や宣言方法によって、あとから別の値を代入できるかどうかが異なる。",
+    "example": "let score = 10;"
+  },
+  {
+    "id": "constant",
+    "category": "basics",
+    "term": "constant",
+    "match": [
+      "定数"
+    ],
+    "short": "変更しない値や、再代入できない名前。",
+    "detail": "JavaScriptのconstは再代入を禁止する。オブジェクトや配列の中身まで変更できなくなるわけではない。",
+    "example": "const limit = 100;"
+  },
+  {
+    "id": "function",
+    "category": "basics",
+    "term": "function",
+    "match": [
+      "関数",
+      "ファンクション"
+    ],
+    "short": "ひとまとまりの処理に名前などを付け、繰り返し使えるようにしたもの。",
+    "detail": "引数で値を受け取り、戻り値として結果を返すことができる。",
+    "example": "function double(n) { return n * 2; }"
+  },
+  {
+    "id": "argument",
+    "category": "basics",
+    "term": "argument",
+    "match": [
+      "引数",
+      "アーギュメント"
+    ],
+    "short": "関数を呼び出すときに渡す値。",
+    "detail": "関数を定義するときの受け取り口は仮引数（parameter）、呼び出すときの値は実引数（argument）と区別することもある。",
+    "example": "Math.max(3, 7);"
+  },
+  {
+    "id": "parameter",
+    "category": "basics",
+    "term": "parameter",
+    "match": [
+      "仮引数",
+      "パラメータ",
+      "パラメーター"
+    ],
+    "short": "関数の定義で、呼び出し時の値を受け取るために付ける名前。",
+    "detail": "一般には設定値や処理に与える条件を指す場合もある。",
+    "example": "function greet(name) { return name; }"
+  },
+  {
+    "id": "return-value",
+    "category": "basics",
+    "term": "return value",
+    "match": [
+      "戻り値",
+      "返り値"
+    ],
+    "short": "関数が処理の結果として呼び出し元に返す値。",
+    "detail": "JavaScriptではreturnで指定する。値を返さず終了した関数の戻り値はundefinedになる。",
+    "example": "const result = Math.max(3, 7);"
+  },
+  {
+    "id": "array",
+    "category": "basics",
+    "term": "array",
+    "match": [
+      "配列",
+      "アレイ"
+    ],
+    "short": "複数の値を順番に並べてまとめたもの。",
+    "detail": "各要素を位置を示す番号で取り出す。JavaScriptでは先頭の番号は0。",
+    "example": "const colors = ['red', 'blue'];"
+  },
+  {
+    "id": "string",
+    "category": "basics",
+    "term": "string",
+    "match": [
+      "文字列",
+      "ストリング"
+    ],
+    "short": "文字や記号を並べたデータ。",
+    "detail": "JavaScriptでは引用符などで囲んで書く。数字でも引用符で囲むと数値とは異なる文字列になる。",
+    "example": "const message = 'Hello';"
+  },
+  {
+    "id": "boolean",
+    "category": "basics",
+    "term": "boolean",
+    "match": [
+      "真偽値",
+      "ブーリアン"
+    ],
+    "short": "trueかfalseのどちらかを表すデータ型。",
+    "detail": "条件の成立・不成立や、機能が有効かどうかなどを表す。",
+    "example": "const isReady = true;"
+  },
+  {
+    "id": "conditional",
+    "category": "basics",
+    "term": "conditional statement",
+    "match": [
+      "条件分岐"
+    ],
+    "short": "条件に応じて実行する処理を変えること。",
+    "detail": "ifやswitchなどを使い、入力や状態によって処理を選ぶ。",
+    "example": "if (score >= 60) { console.log('合格'); }"
+  },
+  {
+    "id": "loop",
+    "category": "basics",
+    "term": "loop",
+    "match": [
+      "ループ",
+      "繰り返し処理"
+    ],
+    "short": "同じ処理を繰り返し実行する仕組み。",
+    "detail": "forやwhileなどを使う。終了条件が満たされないと無限ループになることがある。",
+    "example": "for (let i = 0; i < 3; i++) { console.log(i); }"
+  },
+  {
+    "id": "scope",
+    "category": "basics",
+    "term": "scope",
+    "match": [
+      "スコープ",
+      "有効範囲"
+    ],
+    "short": "変数などの名前を参照できる範囲。",
+    "detail": "JavaScriptでは関数やブロックが範囲を作る。letやconstで宣言した名前は、そのブロック内で参照できる。"
+  },
+  {
+    "id": "null",
+    "category": "basics",
+    "term": "null",
+    "match": [
+      "ヌル"
+    ],
+    "short": "値が存在しないことを意図的に表す値。",
+    "detail": "JavaScriptでは、まだ選択されていない項目などを明示するときに使う。undefinedとは別の値。",
+    "example": "const selectedUser = null;"
+  },
+  {
+    "id": "undefined",
+    "category": "basics",
+    "term": "undefined",
+    "match": [
+      "アンディファインド"
+    ],
+    "short": "JavaScriptで値が未設定であることなどを表す値。",
+    "detail": "未代入の変数、存在しないプロパティ、値を返さない関数の戻り値などに現れる。",
+    "example": "let result;"
+  },
+  {
+    "id": "exception",
+    "category": "basics",
+    "term": "exception",
+    "match": [
+      "例外",
+      "エクセプション"
+    ],
+    "short": "通常の処理を続けられない状況を知らせる仕組み。",
+    "detail": "JavaScriptではthrowで発生させ、tryとcatchで処理できる。"
+  },
+  {
+    "id": "recursion",
+    "category": "basics",
+    "term": "recursion",
+    "match": [
+      "再帰",
+      "リカージョン"
+    ],
+    "short": "関数が自分自身を呼び出して問題を解く方法。",
+    "detail": "小さな問題に分けて処理する。呼び出しを止める条件が必要。"
+  },
+  {
+    "id": "operator",
+    "category": "basics",
+    "term": "operator",
+    "match": [
+      "演算子"
+    ],
+    "short": "値の計算や比較などの操作を表す記号。",
+    "detail": "足し算の+、比較の===、論理演算の&&などがある。",
+    "example": "const total = 2 + 3;"
+  },
+  {
+    "id": "data-type",
+    "category": "basics",
+    "term": "data type",
+    "match": [
+      "データ型"
+    ],
+    "short": "値の種類や、その値にできる操作を表す分類。",
+    "detail": "数値、文字列、真偽値などがある。言語によって型の扱いや検査の方法が異なる。"
+  },
+  {
+    "id": "callback",
+    "category": "javascript",
+    "term": "callback",
+    "match": [
+      "コールバック",
+      "コールバック関数"
+    ],
+    "short": "別の処理に渡し、その処理から呼び出してもらう関数。",
+    "detail": "イベント処理や配列操作などに使う。コールバックが必ず非同期で呼ばれるとは限らない。",
+    "example": "[1, 2].map(n => n * 2);"
+  },
+  {
+    "id": "asynchronous",
+    "category": "javascript",
+    "term": "asynchronous",
+    "match": [
+      "非同期処理",
+      "非同期",
+      "async processing"
+    ],
+    "short": "処理の完了を待つ間に、ほかの処理を進められる仕組み。",
+    "detail": "通信やタイマーなどで使う。同時に複数のCPUで実行する並列処理とは同じ意味ではない。"
+  },
+  {
+    "id": "async-await",
+    "category": "javascript",
+    "term": "async/await",
+    "match": [
+      "async await",
+      "アシンクアウェイト"
+    ],
+    "short": "Promiseを使う非同期処理を、順番に読む形で書く構文。",
+    "detail": "async関数はPromiseを返す。awaitはその処理を一時停止して結果を待つが、JavaScript全体を停止するわけではない。",
+    "example": "const response = await fetch('/api/users');"
+  },
+  {
+    "id": "arrow-function",
+    "category": "javascript",
+    "term": "arrow function",
+    "match": [
+      "アロー関数"
+    ],
+    "short": "矢印の記号を使って関数を書く構文。",
+    "detail": "通常の関数とはthisの扱いが異なり、外側のthisを引き継ぐ。",
+    "example": "const double = n => n * 2;"
+  },
+  {
+    "id": "destructuring",
+    "category": "javascript",
+    "term": "destructuring",
+    "match": [
+      "分割代入"
+    ],
+    "short": "配列やオブジェクトから値を取り出し、変数にまとめて代入する構文。",
+    "detail": "必要な要素やプロパティを短く取り出せる。",
+    "example": "const { name, age } = user;"
+  },
+  {
+    "id": "spread-syntax",
+    "category": "javascript",
+    "term": "spread syntax",
+    "match": [
+      "スプレッド構文"
+    ],
+    "short": "配列の要素やオブジェクトのプロパティなどを展開する構文。",
+    "detail": "コピーや結合に使えるが、入れ子のオブジェクトまで複製する深いコピーではない。",
+    "example": "const copy = [...items];"
+  },
+  {
+    "id": "optional-chaining",
+    "category": "javascript",
+    "term": "optional chaining",
+    "match": [
+      "オプショナルチェーン",
+      "オプショナルチェイニング"
+    ],
+    "short": "途中の値がnullやundefinedでもエラーにせずアクセスを止める構文。",
+    "detail": "その場合の結果はundefinedになる。存在するか分からないプロパティを参照するときに使う。",
+    "example": "const name = user?.profile?.name;"
+  },
+  {
+    "id": "type-inference",
+    "category": "javascript",
+    "term": "type inference",
+    "match": [
+      "型推論"
+    ],
+    "short": "明示的に書かれていない型を、値や使い方から推定する仕組み。",
+    "detail": "TypeScriptでは初期値などから型が決まるため、すべての変数に型注釈を書く必要はない。",
+    "example": "const count = 3;"
+  },
+  {
+    "id": "union-type",
+    "category": "javascript",
+    "term": "union type",
+    "match": [
+      "ユニオン型",
+      "共用体型"
+    ],
+    "short": "複数の型のいずれかを受け付ける型。",
+    "detail": "TypeScriptでは縦棒で型を並べる。使うときは型を絞り込む必要がある場合がある。"
+  },
+  {
+    "id": "event-loop",
+    "category": "javascript",
+    "term": "event loop",
+    "match": [
+      "イベントループ"
+    ],
+    "short": "イベントや非同期処理のコールバックを実行する順序を管理する仕組み。",
+    "detail": "JavaScriptの実行中に長い同期処理を行うと、ほかのイベント処理や画面更新が遅れる。"
+  },
+  {
+    "id": "props",
+    "category": "frameworks",
+    "term": "props",
+    "match": [
+      "プロップス"
+    ],
+    "short": "親コンポーネントから子コンポーネントに渡す入力。",
+    "detail": "Reactでは子側で直接書き換えず、渡された値を使って表示や動作を決める。",
+    "example": "<Greeting name=\"Aki\" />"
+  },
+  {
+    "id": "state",
+    "category": "frameworks",
+    "term": "state",
+    "match": [
+      "ステート",
+      "状態"
+    ],
+    "short": "コンポーネントなどが保持する、時間とともに変わるデータ。",
+    "detail": "Reactではstateの更新をきっかけに再描画される。更新用の関数を使って変更する。"
+  },
+  {
+    "id": "hook",
+    "category": "frameworks",
+    "term": "hook",
+    "match": [
+      "フック",
+      "React Hook"
+    ],
+    "short": "Reactの関数コンポーネントなどから状態やライフサイクルに関わる機能を使う仕組み。",
+    "detail": "useStateやuseEffectなどがある。通常のフックは条件分岐やループの中で呼ばず、トップレベルで呼ぶ。"
+  },
+  {
+    "id": "jsx",
+    "category": "frameworks",
+    "term": "JSX",
+    "match": [
+      "ジェイエスエックス"
+    ],
+    "short": "JavaScriptの中にHTMLに似た記法でUIを書ける構文拡張。",
+    "detail": "ビルド時にJavaScriptへ変換される。HTMLそのものではなく、属性などに違いがある。",
+    "example": "const heading = <h1>Hello</h1>;"
+  },
+  {
+    "id": "rendering",
+    "category": "frameworks",
+    "term": "rendering",
+    "match": [
+      "レンダリング",
+      "描画"
+    ],
+    "short": "データや構造から表示内容を作る処理。",
+    "detail": "ReactではコンポーネントからUIの構造を計算する。実際のDOM更新やブラウザによる描画は別の段階で行われる。"
+  },
+  {
+    "id": "virtual-dom",
+    "category": "frameworks",
+    "term": "virtual DOM",
+    "match": [
+      "仮想DOM",
+      "バーチャルDOM"
+    ],
+    "short": "画面の構造をJavaScript上のデータとして表したもの。",
+    "detail": "Reactなどは前後の構造を比較し、実際のDOMに反映する変更を決める。"
+  },
+  {
+    "id": "routing",
+    "category": "frameworks",
+    "term": "routing",
+    "match": [
+      "ルーティング"
+    ],
+    "short": "URLなどに応じて表示する画面や実行する処理を選ぶ仕組み。",
+    "detail": "ブラウザ内で画面を切り替える場合と、サーバーでリクエストの処理先を選ぶ場合がある。"
+  },
+  {
+    "id": "hydration",
+    "category": "frameworks",
+    "term": "hydration",
+    "match": [
+      "ハイドレーション"
+    ],
+    "short": "サーバーが生成したHTMLに、ブラウザ側の動作を結び付ける処理。",
+    "detail": "表示済みの画面を操作可能にする。サーバーとブラウザで内容が食い違うと問題になることがある。"
+  },
+  {
+    "id": "dom",
+    "category": "html-css",
+    "term": "DOM",
+    "match": [
+      "ドム",
+      "Document Object Model"
+    ],
+    "short": "HTMLなどの文書を、プログラムから操作できる木構造として表したもの。",
+    "detail": "JavaScriptから要素やテキストを取得・追加・変更できる。",
+    "example": "document.querySelector('h1');"
+  },
+  {
+    "id": "event",
+    "category": "html-css",
+    "term": "event",
+    "match": [
+      "イベント"
+    ],
+    "short": "クリックや入力など、プログラムが反応できる出来事。",
+    "detail": "要素にリスナーを登録して、出来事が発生したときに処理を実行する。",
+    "example": "button.addEventListener('click', handleClick);"
+  },
+  {
+    "id": "event-listener",
+    "category": "html-css",
+    "term": "event listener",
+    "match": [
+      "イベントリスナー",
+      "イベントリスナ"
+    ],
+    "short": "イベントが発生したときに呼び出される処理。",
+    "detail": "addEventListenerで登録できる。不要になったリスナーを解除すると、不要な処理や参照を減らせる。"
+  },
+  {
+    "id": "css-selector",
+    "category": "html-css",
+    "term": "CSS selector",
+    "match": [
+      "selector",
+      "セレクタ",
+      "セレクター"
+    ],
+    "short": "スタイルを適用するHTML要素などを選ぶための指定。",
+    "detail": "要素名、クラス、ID、親子関係などで対象を絞れる。",
+    "example": ".card > p { color: blue; }"
+  },
+  {
+    "id": "flexbox",
+    "category": "html-css",
+    "term": "Flexbox",
+    "match": [
+      "flex box",
+      "フレックスボックス"
+    ],
+    "short": "要素を主に横一列または縦一列に並べ、配置や幅を調整する仕組み。",
+    "detail": "display: flexを指定し、折り返しや間隔、中央揃えなどを設定する。",
+    "example": ".row { display: flex; gap: 8px; }"
+  },
+  {
+    "id": "css-grid",
+    "category": "html-css",
+    "term": "CSS Grid",
+    "match": [
+      "grid layout",
+      "グリッドレイアウト"
+    ],
+    "short": "行と列を使って要素を配置するCSSの仕組み。",
+    "detail": "二次元のレイアウトに向いており、列幅や行の高さをまとめて指定できる。",
+    "example": ".grid { display: grid; grid-template-columns: 1fr 1fr; }"
+  },
+  {
+    "id": "media-query",
+    "category": "html-css",
+    "term": "media query",
+    "match": [
+      "メディアクエリ"
+    ],
+    "short": "画面幅などの条件に応じてCSSを切り替える仕組み。",
+    "detail": "小さい画面向けのレイアウトや、ダークモード向けの配色などに使う。",
+    "example": "@media (max-width: 600px) { .menu { display: none; } }"
+  },
+  {
+    "id": "accessibility",
+    "category": "html-css",
+    "term": "accessibility",
+    "match": [
+      "アクセシビリティ"
+    ],
+    "short": "さまざまな状況や特性を持つ人が情報や機能を利用できること。",
+    "detail": "キーボード操作、読み上げへの対応、十分な色のコントラストなどが関係する。"
+  },
+  {
+    "id": "build",
+    "category": "development",
+    "term": "build",
+    "match": [
+      "ビルド"
+    ],
+    "short": "ソースコードから実行・配布できるファイルを作る処理。",
+    "detail": "型チェック、コード変換、ファイルの結合やコピーなどが含まれることがある。",
+    "example": "npm run build"
+  },
+  {
+    "id": "bundle",
+    "category": "development",
+    "term": "bundle",
+    "match": [
+      "バンドル",
+      "バンドリング"
+    ],
+    "short": "複数のコードや依存ファイルをまとめること。",
+    "detail": "ブラウザ向けのJavaScriptなどを配布しやすくする。用途に応じて複数の出力ファイルに分ける場合もある。"
+  },
+  {
+    "id": "deploy",
+    "category": "development",
+    "term": "deploy",
+    "match": [
+      "デプロイ",
+      "デプロイメント"
+    ],
+    "short": "作ったアプリを利用できる環境へ配置・反映すること。",
+    "detail": "サーバーへの配置やホスティングサービスへの公開などを指す。"
+  },
+  {
+    "id": "dependency",
+    "category": "development",
+    "term": "dependency",
+    "match": [
+      "依存関係",
+      "依存パッケージ"
+    ],
+    "short": "あるコードやツールを動かすために必要な別の部品。",
+    "detail": "外部ライブラリなどが該当する。バージョンや更新による互換性に注意する。"
+  },
+  {
+    "id": "environment-variable",
+    "category": "development",
+    "term": "environment variable",
+    "match": [
+      "環境変数"
+    ],
+    "short": "実行環境からプログラムへ渡す、名前付きの設定値。",
+    "detail": "接続先や実行モードなどを切り替える。ブラウザ向けコードに埋め込んだ値は秘密にはできない。",
+    "example": "process.env.NODE_ENV"
+  },
+  {
+    "id": "package",
+    "category": "development",
+    "term": "package",
+    "match": [
+      "パッケージ"
+    ],
+    "short": "再利用・配布できる単位にまとめたコードや関連ファイル。",
+    "detail": "npmではpackage.jsonに名前や依存関係などを記録する。"
+  },
+  {
+    "id": "module",
+    "category": "development",
+    "term": "module",
+    "match": [
+      "モジュール"
+    ],
+    "short": "機能をひとまとまりに分けたコードの単位。",
+    "detail": "JavaScriptではexportで公開し、importで別のファイルから利用できる。",
+    "example": "import { helper } from './helper.js';"
+  },
+  {
+    "id": "debugging",
+    "category": "development",
+    "term": "debugging",
+    "match": [
+      "debug",
+      "デバッグ"
+    ],
+    "short": "不具合の原因を調べ、動作を確認・修正する作業。",
+    "detail": "ログやブレークポイントを使い、値や処理の流れを追いかける。"
+  },
+  {
+    "id": "unit-test",
+    "category": "development",
+    "term": "unit test",
+    "match": [
+      "単体テスト",
+      "ユニットテスト"
+    ],
+    "short": "関数などの小さな単位が期待どおり動くか確かめるテスト。",
+    "detail": "入力に対する結果や、エラー時の動作などを自動で検証する。"
+  },
+  {
+    "id": "continuous-integration",
+    "category": "development",
+    "term": "continuous integration",
+    "match": [
+      "CI",
+      "継続的インテグレーション"
+    ],
+    "short": "変更を取り込む際にビルドやテストなどを自動実行する開発の仕組み。",
+    "detail": "GitHub Actionsなどで実行し、不具合や統合時の問題を早く見つける。"
+  },
+  {
+    "id": "http",
+    "category": "network-data",
+    "term": "HTTP",
+    "match": [
+      "Hypertext Transfer Protocol"
+    ],
+    "short": "Webでリクエストとレスポンスをやり取りするための通信規則。",
+    "detail": "URLで対象を指定し、メソッドやヘッダー、本文などを使って通信する。"
+  },
+  {
+    "id": "https",
+    "category": "network-data",
+    "term": "HTTPS",
+    "match": [
+      "エイチティーティーピーエス"
+    ],
+    "short": "TLSによって通信を保護したHTTP。",
+    "detail": "通信内容の暗号化、改ざんの検知、接続先の認証に使われる。サイトの内容そのものが安全だと保証するものではない。"
+  },
+  {
+    "id": "request",
+    "category": "network-data",
+    "term": "request",
+    "match": [
+      "リクエスト"
+    ],
+    "short": "クライアントなどから相手に送る、処理やデータを求める要求。",
+    "detail": "HTTPではメソッド、URL、ヘッダー、必要に応じた本文などから構成される。"
+  },
+  {
+    "id": "response",
+    "category": "network-data",
+    "term": "response",
+    "match": [
+      "レスポンス"
+    ],
+    "short": "リクエストを受け取った相手が返す応答。",
+    "detail": "HTTPではステータスコード、ヘッダー、必要に応じた本文などを含む。"
+  },
+  {
+    "id": "json",
+    "category": "network-data",
+    "term": "JSON",
+    "match": [
+      "ジェイソン",
+      "JavaScript Object Notation"
+    ],
+    "short": "オブジェクトや配列などのデータを文字列で表す形式。",
+    "detail": "API通信や設定ファイルで使う。キーや文字列は二重引用符で囲み、コメントは書けない。",
+    "example": "{\"name\": \"Aki\", \"active\": true}"
+  },
+  {
+    "id": "url",
+    "category": "network-data",
+    "term": "URL",
+    "match": [
+      "ユーアールエル",
+      "Uniform Resource Locator"
+    ],
+    "short": "Web上などにある情報の場所やアクセス方法を表す文字列。",
+    "detail": "httpsなどのスキーム、ホスト名、パス、クエリなどから構成される。",
+    "example": "https://example.com/users?page=2"
+  },
+  {
+    "id": "cookie",
+    "category": "network-data",
+    "term": "Cookie",
+    "match": [
+      "クッキー"
+    ],
+    "short": "ブラウザが保存し、条件に合うリクエストでサーバーに送る小さなデータ。",
+    "detail": "ログイン状態の識別や設定の保持などに使う。送信先や有効期限などを指定できる。"
+  },
+  {
+    "id": "session",
+    "category": "network-data",
+    "term": "session",
+    "match": [
+      "セッション"
+    ],
+    "short": "一連のアクセスを同じ利用者のやり取りとして扱う単位や仕組み。",
+    "detail": "Webでは識別子をCookieなどで受け渡し、サーバー側の状態と対応付ける方法がある。"
+  },
+  {
+    "id": "database",
+    "category": "network-data",
+    "term": "database",
+    "match": [
+      "データベース",
+      "DB"
+    ],
+    "short": "データを整理して保存し、検索や更新を行うための仕組み。",
+    "detail": "表形式で扱うリレーショナルデータベースなど、用途に応じた種類がある。"
+  },
+  {
+    "id": "sql",
+    "category": "network-data",
+    "term": "SQL",
+    "match": [
+      "エスキューエル",
+      "Structured Query Language"
+    ],
+    "short": "主にリレーショナルデータベースのデータを操作するための言語。",
+    "detail": "SELECTで検索し、INSERTで追加、UPDATEで更新、DELETEで削除する。",
+    "example": "SELECT name FROM users;"
+  },
+  {
+    "id": "query",
+    "category": "network-data",
+    "term": "query",
+    "match": [
+      "クエリ"
+    ],
+    "short": "データベースなどに送る、検索や操作の要求。",
+    "detail": "SQL文を指す場合や、URLに付ける検索条件などを指す場合がある。"
+  },
+  {
+    "id": "transaction",
+    "category": "network-data",
+    "term": "transaction",
+    "match": [
+      "トランザクション"
+    ],
+    "short": "複数の操作をひとまとまりとして扱う処理単位。",
+    "detail": "データベースでは途中で失敗した際に取り消すなどして、データの整合性を保つ。"
+  },
+  {
+    "id": "authentication",
+    "category": "network-data",
+    "term": "authentication",
+    "match": [
+      "認証"
+    ],
+    "short": "アクセスしている相手が誰かを確かめること。",
+    "detail": "パスワードや認証器などを使う。何をしてよいか決める認可とは区別する。"
+  },
+  {
+    "id": "authorization",
+    "category": "network-data",
+    "term": "authorization",
+    "match": [
+      "認可"
+    ],
+    "short": "利用者などが特定の操作をしてよいか判断すること。",
+    "detail": "役割や権限に応じて、閲覧・編集などの操作を許可する。"
+  },
+  {
+    "id": "algorithm",
+    "category": "design-performance",
+    "term": "algorithm",
+    "match": [
+      "アルゴリズム"
+    ],
+    "short": "問題を解くための手順。",
+    "detail": "並べ替えや検索などにさまざまな方法があり、入力の大きさによって処理時間やメモリ使用量が変わる。"
+  },
+  {
+    "id": "data-structure",
+    "category": "design-performance",
+    "term": "data structure",
+    "match": [
+      "データ構造"
+    ],
+    "short": "データを保存・整理する方法。",
+    "detail": "配列、リスト、木、ハッシュ表などがあり、探し方や更新の仕方に応じて使い分ける。"
+  },
+  {
+    "id": "time-complexity",
+    "category": "design-performance",
+    "term": "time complexity",
+    "match": [
+      "時間計算量",
+      "計算量"
+    ],
+    "short": "入力の大きさに対して処理の手間がどう増えるかを表す尺度。",
+    "detail": "O(n)やO(n²)などで表す。実際の秒数そのものを表すわけではない。"
+  },
+  {
+    "id": "memory-leak",
+    "category": "design-performance",
+    "term": "memory leak",
+    "match": [
+      "メモリリーク"
+    ],
+    "short": "不要になったデータなどが解放されず、メモリを使い続ける問題。",
+    "detail": "JavaScriptでも、不要なイベントリスナーや参照を残すことで発生する。"
+  },
+  {
+    "id": "lazy-loading",
+    "category": "design-performance",
+    "term": "lazy loading",
+    "match": [
+      "遅延読み込み",
+      "遅延ロード"
+    ],
+    "short": "必要になるまでデータやコードなどの読み込みを後回しにする方法。",
+    "detail": "最初の読み込み量を減らせる一方、使う瞬間に待ち時間が生じる場合がある。"
+  },
+  {
+    "id": "pagination",
+    "category": "design-performance",
+    "term": "pagination",
+    "match": [
+      "ページネーション",
+      "ページ分割"
+    ],
+    "short": "大量のデータを一定件数ずつに分けて取得・表示する方法。",
+    "detail": "一覧全体を一度に読み込まずに済むため、通信量や描画の負荷を抑えられる。"
+  },
+  {
+    "id": "rate-limit",
+    "category": "design-performance",
+    "term": "rate limit",
+    "match": [
+      "レート制限",
+      "レートリミット"
+    ],
+    "short": "一定時間に受け付けるリクエストなどの回数を制限する仕組み。",
+    "detail": "過負荷や乱用を防ぐために使う。制限された側は待機や再試行の間隔を考慮する。"
   }
 ]

@@ -1,16 +1,11 @@
 import { Dictionary, builtinTerms, type Match } from '@techword/core';
+import { observeCategorySettings } from './category-settings';
+import { IncrementalHighlighter, isSearchableText } from './highlighter';
+import { getFavoriteIds, toggleFavorite, watchFavoriteIds } from './favorites';
 
-const dictionary = new Dictionary(builtinTerms);
-
+let dictionary = new Dictionary([]);
+let highlighter: IncrementalHighlighter | undefined;
 installHighlightStyle();
-highlight();
-const observer = new MutationObserver(highlight);
-const config = { 
-  childList: true, // 子要素の追加・削除を監視
-  subtree: true,    // 子孫要素（さらに下の階層）まで含めて監視する場合に true
-  characterData: true, // テキストノードの変更を監視
-};
-observer.observe(document.body, config);
 
 /** ホバーしてから出すまでの待ち時間。すぐ出すとポインタを動かすたびに点滅する。 */
 const HOVER_DELAY_MS = 250;
@@ -18,19 +13,53 @@ const HOVER_DELAY_MS = 250;
 const tooltip = createTooltip();
 let hoverTimer: number | undefined;
 let currentId: string | undefined;
+let currentFavoriteButton: HTMLButtonElement | undefined;
+let favoriteIds = new Set<string>();
+let pointerInsideTooltip = false;
+
+observeCategorySettings((settings) => {
+  dictionary = new Dictionary(builtinTerms.filter((entry) => settings[entry.category ?? 'basics']));
+  window.clearTimeout(hoverTimer);
+  hide();
+  if (highlighter) highlighter.setDictionary(dictionary);
+  else highlighter = new IncrementalHighlighter(dictionary);
+}, (error) => console.error('TechTerm: 表示設定を読み込めませんでした。', error));
+
+void getFavoriteIds()
+  .then((ids) => {
+    favoriteIds = new Set(ids);
+    refreshCurrentFavoriteButton();
+  })
+  .catch((error: unknown) => console.error('TechTerm: お気に入りを読み込めませんでした。', error));
+
+watchFavoriteIds((ids) => {
+  favoriteIds = new Set(ids);
+  refreshCurrentFavoriteButton();
+});
 
 document.addEventListener('mousemove', (event) => {
   window.clearTimeout(hoverTimer);
+  if (event.composedPath().includes(tooltip.host) || pointerInsideTooltip) return;
   hoverTimer = window.setTimeout(() => handleHover(event), HOVER_DELAY_MS);
 });
 document.addEventListener('scroll', hide, { passive: true, capture: true });
 window.addEventListener('blur', hide);
+
+tooltip.host.addEventListener('pointerenter', () => {
+  pointerInsideTooltip = true;
+  window.clearTimeout(hoverTimer);
+});
+tooltip.host.addEventListener('pointerleave', () => {
+  pointerInsideTooltip = false;
+  hide();
+});
 
 function handleHover(event: MouseEvent): void {
   if (tooltip.host.style.display === 'block' && tooltip.host.matches(':hover')) return; // ツールチップ上にマウスがあるときはツールチップを消さないようにする
   const caret = caretFromPoint(event.clientX, event.clientY);
   if (!caret || caret.node.nodeType !== Node.TEXT_NODE) return hide();
 
+  if (!isSearchableText(caret.node as Text)) return hide();
   const text = caret.node.textContent ?? '';
   const hit = dictionary.findAt(text, caret.offset);
   if (!hit) return hide();
@@ -44,6 +73,8 @@ function handleHover(event: MouseEvent): void {
 
 function hide(): void {
   currentId = undefined;
+  currentFavoriteButton = undefined;
+  pointerInsideTooltip = false;
   tooltip.host.style.display = 'none';
 }
 
@@ -68,10 +99,37 @@ function render({ entry }: Match): void {
   const { panel } = tooltip;
   panel.replaceChildren();
 
+  const header = document.createElement('div');
+  header.className = 'tw-header';
+
   const head = document.createElement('div');
   head.className = 'tw-head';
   head.textContent = entry.term;
-  panel.append(head);
+
+  const favoriteButton = document.createElement('button');
+  favoriteButton.type = 'button';
+  favoriteButton.className = 'tw-favorite';
+  updateFavoriteButton(favoriteButton, entry.id);
+  favoriteButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    favoriteButton.disabled = true;
+
+    try {
+      const isFavorite = await toggleFavorite(entry.id);
+      if (isFavorite) favoriteIds.add(entry.id);
+      else favoriteIds.delete(entry.id);
+      updateFavoriteButton(favoriteButton, entry.id);
+    } catch (error: unknown) {
+      console.error('TechTerm: お気に入りを更新できませんでした。', error);
+    } finally {
+      favoriteButton.disabled = false;
+    }
+  });
+  currentFavoriteButton = favoriteButton;
+
+  header.append(head, favoriteButton);
+  panel.append(header);
 
   const short = document.createElement('div');
   short.className = 'tw-short';
@@ -104,6 +162,7 @@ function render({ entry }: Match): void {
 /** ページ側の CSS に影響されないよう Shadow DOM に閉じ込める。 */
 function createTooltip(): { host: HTMLElement; panel: HTMLElement } {
   const host = document.createElement('div');
+  host.dataset.techtermUi = '';
   host.style.cssText = 'position:fixed;z-index:2147483647;display:none;';
   const root = host.attachShadow({ mode: 'closed' });
 
@@ -115,7 +174,16 @@ function createTooltip(): { host: HTMLElement; panel: HTMLElement } {
       box-shadow: 0 6px 20px rgba(0,0,0,.35);
       font: 13px/1.6 -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
     }
-    .tw-head { font-weight: 700; margin-bottom: 2px; }
+    .tw-header { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+    .tw-head { flex: 1; min-width: 0; font-weight: 700; }
+    .tw-favorite {
+      display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0;
+      border: 1px solid #596276; border-radius: 7px; background: #2b3241; color: #ffd166;
+      cursor: pointer; font: 20px/1 sans-serif;
+    }
+    .tw-favorite:hover { background: #394256; }
+    .tw-favorite:focus-visible { outline: 2px solid #7fb2ff; outline-offset: 2px; }
+    .tw-favorite:disabled { cursor: wait; opacity: .65; }
     .tw-short { color: #f2f2f2; }
     .tw-detail { margin-top: 6px; color: #b9c0cf; }
     .tw-example {
@@ -131,6 +199,21 @@ function createTooltip(): { host: HTMLElement; panel: HTMLElement } {
   document.documentElement.append(host);
 
   return { host, panel };
+}
+
+function updateFavoriteButton(button: HTMLButtonElement, id: string): void {
+  const isFavorite = favoriteIds.has(id);
+  const label = isFavorite ? 'お気に入りから削除' : 'お気に入りに追加';
+  button.textContent = isFavorite ? '★' : '☆';
+  button.setAttribute('aria-pressed', String(isFavorite));
+  button.setAttribute('aria-label', label);
+  button.title = label;
+}
+
+function refreshCurrentFavoriteButton(): void {
+  if (currentId && currentFavoriteButton) {
+    updateFavoriteButton(currentFavoriteButton, currentId);
+  }
 }
 
 /** Chrome (caretRangeFromPoint) と Firefox (caretPositionFromPoint) の差を吸収する。 */
@@ -152,33 +235,11 @@ function caretFromPoint(x: number, y: number): { node: Node; offset: number } | 
   return undefined;
 }
 
-function highlight(): void {
-  let ranges: Range[] = [];
-  const walker = document.createTreeWalker(
-    document.body, // body以下のノードを走査する
-    NodeFilter.SHOW_TEXT, //テキストノードのみを対象
-  );
-
-  while (walker.nextNode() !== null) {
-    const nodeTagName = walker.currentNode.parentElement?.tagName;
-    if (nodeTagName === 'SCRIPT' || nodeTagName === 'STYLE') continue; //　負荷軽減のためにスクリプトとスタイルの中身は無視する
-    const textNodes = dictionary.findAll(walker.currentNode.textContent ?? '');
-    for (const {start, end} of textNodes) {
-      const range = new Range();
-      range.setStart(walker.currentNode, start);
-      range.setEnd(walker.currentNode, end);
-      ranges.push(range);
-    }
-  }
-  const highlightRange = new Highlight(...ranges); //スプレッド構文でranges配列を展開し引数として渡す
-  CSS.highlights.set("tw-highlight", highlightRange);
-}
-
 function installHighlightStyle(): void {
   const style = document.createElement("style");
   style.textContent = `
     ::highlight(tw-highlight) {
-      background-color: #ffff00;
+      background-color: rgba(255, 220, 100, 0.2);
     }`;
   document.head.append(style);
 }

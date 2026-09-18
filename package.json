@@ -10,7 +10,7 @@
   "scripts": {
     "build": "npm run build -w @techword/core && npm run build -w techword-vscode && npm run build -w @techword/browser",
     "watch:core": "npm run watch -w @techword/core",
-    "test": "npm test -w @techword/core"
+    "test": "npm test -w @techword/core && npm test -w @techword/browser"
   },
   "devDependencies": {
     "@types/node": "^22.20.1",

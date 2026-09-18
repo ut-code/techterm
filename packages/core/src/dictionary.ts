@@ -5,9 +5,16 @@ import type { LookupOptions, Match, TermEntry } from './types';
 const MAX_PHRASE_TOKENS = 4;
 
 /** トークンとトークンの間に許す文字（ここ以外が挟まれば別の語とみなす）。 */
-const JOINER_RE = /^[\s\-_.]*$/;
+const JOINER_RE = /^[\s\-_./]*$/;
+
+interface JapaneseNode {
+  children: Map<string, JapaneseNode>;
+  surface?: string;
+}
 
 export class Dictionary {
+  private readonly japanese: JapaneseNode = { children: new Map() };
+
   /** 正規化キー -> エントリ群（同綴りで言語違いがありうるので配列）。 */
   private readonly index = new Map<string, TermEntry[]>();
 
@@ -17,6 +24,17 @@ export class Dictionary {
         const norm = normalize(surface);
         if (!norm) continue;
         this.add(norm, entry);
+        // 漢字・ひらがなを含む登録済み表記だけを直接照合する。
+        // 「値」「幅」など一文字の一般語は文章中で過剰に検出しない。
+        if (surface.length > 1 && /[\p{Script=Han}\p{Script=Hiragana}]/u.test(surface)) {
+          let node = this.japanese;
+          for (let i = 0; i < surface.length; i++) {
+            const char = surface[i];
+            if (!node.children.has(char)) node.children.set(char, { children: new Map() });
+            node = node.children.get(char)!;
+          }
+          node.surface = surface;
+        }
         const tight = tighten(norm);
         if (tight !== norm) this.add(tight, entry);
       }
@@ -54,6 +72,14 @@ export class Dictionary {
    * VS Code のホバーもブラウザのホバーもこの 1 関数に集約する。
    */
   findAt(text: string, offset: number, options: LookupOptions = {}): Match | undefined {
+    const tokenMatch = this.findTokenAt(text, offset, options);
+    const japaneseMatches = this.findJapanese(text, options)
+      .filter(({ start, end }) => offset >= start && offset < end);
+    if (tokenMatch) japaneseMatches.push(tokenMatch);
+    return japaneseMatches.sort((a, b) => (b.end - b.start) - (a.end - a.start))[0];
+  }
+
+  private findTokenAt(text: string, offset: number, options: LookupOptions): Match | undefined {
     const tokens = tokenize(text);
     const hit = tokens.findIndex((t) => offset >= t.start && offset <= t.end);
     if (hit === -1) return undefined;
@@ -91,6 +117,34 @@ export class Dictionary {
           start += len - 1; //forループでstartが++されることを考慮する
           break;
         }
+      }
+    }
+    const combined = [...matches, ...this.findJapanese(text, options)]
+      .sort((a, b) => a.start - b.start || b.end - a.end);
+    const result: Match[] = [];
+    for (const match of combined) {
+      if (!result.length || match.start >= result[result.length - 1].end) result.push(match);
+    }
+    return result;
+  }
+
+  private findJapanese(text: string, options: LookupOptions): Match[] {
+    const matches: Match[] = [];
+    for (let start = 0; start < text.length; start++) {
+      let node = this.japanese;
+      let longest: Match | undefined;
+      for (let end = start; end < text.length; end++) {
+        const next = node.children.get(text[end]);
+        if (!next) break;
+        node = next;
+        if (node.surface) {
+          const entry = this.lookup(node.surface, options);
+          if (entry) longest = { entry, start, end: end + 1 };
+        }
+      }
+      if (longest) {
+        matches.push(longest);
+        start = longest.end - 1;
       }
     }
     return matches;

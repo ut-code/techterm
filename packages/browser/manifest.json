@@ -2,7 +2,18 @@
   "manifest_version": 3,
   "name": "TechTerm",
   "version": "0.2.1",
+  "minimum_chrome_version": "114",
   "description": "プログラミング用語にホバーすると、意味を簡潔に表示します。",
+  "permissions": ["storage", "sidePanel"],
+  "action": {
+    "default_title": "TechTermのお気に入りを開く"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
   "content_scripts": [
     {
       "matches": [

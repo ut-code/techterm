@@ -1,7 +1,11 @@
+import type { TermCategory } from './categories';
+
 /** 辞書 1 件分のエントリ。data/terms.json がこの配列。 */
 export interface TermEntry {
   /** 安定した内部 ID。ファイル内で一意にする。 */
   id: string;
+  /** 表示カテゴリ。省略したユーザー辞書はプログラミング基礎として扱う。 */
+  category?: TermCategory;
   /** 見出しとして表示する語。 */
   term: string;
   /**
